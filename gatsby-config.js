@@ -1,6 +1,13 @@
 module.exports = {
   siteMetadata: {
-    title: "chh-web-gatsby",
+    title: "Cristian Huijse Portfolio",
+    description:
+      "This is the professional web dev portfolio of Cristian Huijse.",
+    year: "2021",
+    author: "Cristian Huijse Heise",
+    github: "https://github.com/chuijse",
+    linkedin: "https://www.linkedin.com/in/cristianhuijse/",
+    url: "http://chh.work",
   },
   plugins: [
     {
