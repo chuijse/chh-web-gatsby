@@ -1,6 +1,6 @@
-import React from "react"
-import { Helmet } from "react-helmet"
-import { StaticQuery, graphql } from "gatsby"
+import React from "react";
+import { Helmet } from "react-helmet";
+import { StaticQuery, graphql } from "gatsby";
 
 const Seo = ({
   globaltitle,
@@ -17,16 +17,16 @@ const Seo = ({
   return (
     <StaticQuery
       query={detailsQuery}
-      render={data => {
+      render={(data) => {
         const metaDescription =
-          description || data.site.siteMetadata.description
-        const metaTitle = title || data.site.siteMetadata.title
-        const metaYear = year || data.site.siteMetadata.year
-        const metaUrl = url || data.site.siteMetadata.url
+          description || data.site.siteMetadata.description;
+        const metaTitle = title || data.site.siteMetadata.title;
+        const metaYear = year || data.site.siteMetadata.year;
+        const metaUrl = url || data.site.siteMetadata.url;
         //const metaImage = image || data.site.siteMetadata.image
-        const metaAuthor = author || data.site.siteMetadata.author
-        const metalinkedin = linkedin || data.site.siteMetadata.linkedin
-        const metaGithub = github || data.site.siteMetadata.github
+        const metaAuthor = author || data.site.siteMetadata.author;
+        const metalinkedin = linkedin || data.site.siteMetadata.linkedin;
+        const metaGithub = github || data.site.siteMetadata.github;
         const metaKewords = keywords || [
           "CHH",
           "Cristian",
@@ -48,8 +48,8 @@ const Seo = ({
           "3d modeling",
           "Programming",
           "porgramación",
-        ]
-        const totalMetaKewords = metaKewords.join(`, `)
+        ];
+        const totalMetaKewords = metaKewords.join(`, `);
 
         return (
           <Helmet
@@ -97,13 +97,13 @@ const Seo = ({
               },
             ]}
           />
-        )
+        );
       }}
     />
-  )
-}
+  );
+};
 
-export default Seo
+export default Seo;
 
 const detailsQuery = graphql`
   query DefaulySEOQuery {
@@ -118,4 +118,4 @@ const detailsQuery = graphql`
       }
     }
   }
-`
+`;

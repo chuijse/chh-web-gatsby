@@ -1,10 +1,9 @@
 import React from "react";
-import TopBar from "./TopBar";
 
 export default function Layout({ children }) {
   return (
-    <div className="layout">
-      <TopBar />
+    <div>
+      <p>este es un test</p>
       <div>{children}</div>
     </div>
   );

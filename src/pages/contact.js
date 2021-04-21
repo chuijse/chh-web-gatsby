@@ -1,13 +1,9 @@
-import React from "react"
-import { Link } from "gatsby"
-import Layout from "../components/Layout"
+import React from "react";
 
 export default function Contact() {
   return (
     <>
-      <Layout>
-        <div>Contact me!</div>
-      </Layout>
+      <div>Contact me!</div>
     </>
-  )
+  );
 }

@@ -1,23 +1,26 @@
+@import "../abstract/color";
+@import "../abstract/fonts";
+
 .nav {
-    display: flex;
-    justify-content: space-between;
-    margin-right: 5%;
-    max-width: 500px;
-  
-    .li {
-      font-size: 30px;
-      font-weight: 700;
-      padding: 20px;
-  
-      a {
-        color: black;
-        text-decoration: none;
-        padding: 10px;
-      }
+  width: max-content;
+
+  li {
+    display: inline-block;
+    padding-left: 10px;
+    font-family: "Share Tech Mono", monospace;
+    font-size: 1.5rem;
+    color: $colorGray;
+
+    a {
+      text-decoration: none;
+      text-transform: uppercase;
+      font-family: "Share Tech Mono", monospace;
+      font-size: 1.5rem;
+      color: $colorBlack;
     }
   }
+}
 
-  .activeNav{
-    background-color: orange;
-    color: white !important;
-  }
+.activeNav {
+  color: $colorPrimary !important;
+}

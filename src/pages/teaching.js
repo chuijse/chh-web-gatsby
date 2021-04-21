@@ -1,27 +1,26 @@
-import React from "react"
-import { Link, graphql} from "gatsby"
-import {GatsbyImage} from 'gatsby-plugin-image'
-import Layout from "../components/Layout"
+import React from "react";
+import { Link, graphql } from "gatsby";
+import { GatsbyImage } from "gatsby-plugin-image";
 
-export default function Teaching({data}) {
-    const courses = data.allSanityCourses.nodes
+export default function Teaching({ data }) {
+  const courses = data.allSanityCourses.nodes;
   return (
     <>
-      <Layout>
-        <div>Teaching</div>
-        {courses.map(Course  => (
-            <span key={Course.id}>
-                <Link to={`/teaching/${Course.slug.current}`}>{Course.title}</Link>
-                <GatsbyImage image={Course.mainImage.asset.gatsbyImageData} ></GatsbyImage>
-          </span>
-        ))}
-      </Layout>
+      <div>Teaching</div>
+      {courses.map((Course) => (
+        <span key={Course.id}>
+          <Link to={`/teaching/${Course.slug.current}`}>{Course.title}</Link>
+          <GatsbyImage
+            image={Course.mainImage.asset.gatsbyImageData}
+          ></GatsbyImage>
+        </span>
+      ))}
     </>
-  )
+  );
 }
 
 export const query = graphql`
-query TeachingPage {
+  query TeachingPage {
     allSanityCourses {
       nodes {
         title
@@ -38,4 +37,5 @@ query TeachingPage {
         }
       }
     }
-  }`
+  }
+`;
