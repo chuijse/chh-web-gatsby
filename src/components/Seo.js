@@ -27,9 +27,8 @@ const Seo = ({
         const metaAuthor = author || data.site.siteMetadata.author
         const metalinkedin = linkedin || data.site.siteMetadata.linkedin
         const metaGithub = github || data.site.siteMetadata.github
-
         const metaKewords = keywords || [
-          "Chh",
+          "CHH",
           "Cristian",
           "Huijse",
           "Heise",

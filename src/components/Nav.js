@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "gatsby"
 
-const NavLink = props => {
+/*const NavLink = props => {
   const [active, setActive] = useState(false)
 
   const updateActive = () => {
@@ -28,14 +28,49 @@ const NavLink = props => {
       }}
     />
   )
+}*/
+
+
+
+const NavLink = props => {
+  const [active, setActive] = useState(false)
+
+  const updateActive = () => {
+    if (active) {
+      setTimeout(props.onActive, 200)
+    }
+  }
+
+  useEffect(() => updateActive(), [active])
+
+  const isPartiallyTrue = ({ isCurrent, isPartiallyCurrent }) => {
+    setActive(isCurrent)
+    return isPartiallyCurrent || isCurrent ? { className: "activeNav" }: {}
+    
+  }
+
+  const isPartiallyFalse = ({ isCurrent }) => {
+    setActive(isCurrent)
+    return  isCurrent ? { className: "activeNav" }: {}
+    
+  }
+  
+  return(
+  props.isPartially ?
+  <Link getProps={isPartiallyTrue} {...props}/> 
+  :
+  <Link getProps={isPartiallyFalse} {...props}/>
+  )
 }
 
+
+
 const links = [
-  { link: "/", name: "About" },
-  { link: "/projects/", name: "Projects" },
-  { link: "/teaching/", name: "Teaching" },
-  { link: "/blog/", name: "Blog" },
-  { link: "/contact/", name: "Contact" },
+  { link: "/", name: "About", partially: false },
+  { link: "/projects/", name: "Projects", partially: true },
+  { link: "/teaching/", name: "Teaching", partially: true },
+  { link: "/blog/", name: "Blog", partially: true },
+  { link: "/contact/", name: "Contact", partially: false },
 ]
 
 export default function Nav() {
@@ -44,7 +79,7 @@ export default function Nav() {
       <div className="nav">
         {links.map((links, index) => (
           <div key={index} className="li">
-            <NavLink to={links.link} onActive={() => console.log(links.name)}>
+            <NavLink to={links.link} isPartially={links.partially} onActive={(()=>(console.log(links.name)))}>
               {links.name}
             </NavLink>
           </div>

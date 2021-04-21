@@ -1,21 +1,19 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { Link, graphql} from "gatsby"
+import {GatsbyImage} from 'gatsby-plugin-image'
 import Layout from "../components/Layout"
 
 export default function Blog({data}) {
-    const posts = data.allSanityCourses.nodes
+    const posts = data.allSanityPost.nodes
   return (
     <>
       <Layout>
         <div>Blog</div>
-        {posts.map((posts, index) => (
-            <span key={index}>
-                
+        {posts.map(posts  => (
+            <span key={posts.id}>
                 <Link to={`/blog/${posts.slug.current}`}>{posts.title}</Link>
-                <p>{posts.universities.name}</p>
-                <p>{posts.mainImage.asset.path}</p>
-                <p>{posts.mainImage.caption}</p>
-        </span>
+                <GatsbyImage image={posts.mainImage.asset.gatsbyImageData} ></GatsbyImage>
+          </span>
         ))}
       </Layout>
     </>
@@ -24,23 +22,19 @@ export default function Blog({data}) {
 
 export const query = graphql`
 query blogPage {
-    allSanityCourses {
+    allSanityPost {
       nodes {
-        abstract
         title
+        id
         slug {
           _key
           _type
           current
         }
-        universities {
-          name
-        }
         mainImage {
           asset {
-            path
+            gatsbyImageData(fit: FILLMAX, placeholder: BLURRED)
           }
-          caption
         }
       }
     }
