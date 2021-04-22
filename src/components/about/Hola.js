@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const TextHola = () => {
-  const transition = { duration: 1.4, ease: [0.6, 0.01, -0.05, 0.9] };
+  //const transition = { duration: 1.4, ease: [0.6, 0.01, -0.05, 0.9] };
 
   const container = {
     initial: { opacity: 0, y: 0 },
@@ -26,11 +26,6 @@ const TextHola = () => {
 
   const sentence = "Hola";
   const myArray = sentence.split("");
-  const whiteSapce = ",    ";
-
-  const words = myArray.map((words) => {
-    return <h1>{words.words}</h1>;
-  });
 
   //&nbsp; space !
 

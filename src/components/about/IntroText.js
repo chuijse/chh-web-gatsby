@@ -1,5 +1,5 @@
 import React from "react";
-import { AnimatePresence, motion, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
 const sentence1 =
   "Bienvenido a mi web, siempre he visto el diseño como una disciplina transversal, por este motivo mi trabajo como ";
@@ -50,26 +50,36 @@ const TextHola = () => {
           variants={container}
           className="importantText"
         >
-          {parrafo1.map((words) => (
-            <motion.span variants={item}>{words}&nbsp;</motion.span>
+          {parrafo1.map((words, index) => (
+            <motion.span key={index} variants={item}>
+              {words}&nbsp;
+            </motion.span>
           ))}
           <motion.span variants={item} className="strongYellow">
             diseñador
           </motion.span>
-          {parrafo2.map((words) => (
-            <motion.strong variants={item}>{words}&nbsp;</motion.strong>
+          {parrafo2.map((words, index) => (
+            <motion.strong key={index} variants={item}>
+              {words}&nbsp;
+            </motion.strong>
           ))}
-          {parrafo3.map((words) => (
-            <motion.span variants={item}>{words}&nbsp;</motion.span>
+          {parrafo3.map((words, index) => (
+            <motion.span key={index} variants={item}>
+              {words}&nbsp;
+            </motion.span>
           ))}
-          {parrafo4.map((words) => (
-            <motion.strong variants={item}>{words}&nbsp;</motion.strong>
+          {parrafo4.map((words, index) => (
+            <motion.strong key={index} variants={item}>
+              {words}&nbsp;
+            </motion.strong>
           ))}
           <motion.span variants={item} className="strongYellow">
             diseñado.
           </motion.span>
-          {parrafo5.map((words) => (
-            <motion.span variants={item}>{words}&nbsp;</motion.span>
+          {parrafo5.map((words, index) => (
+            <motion.span key={index} variants={item}>
+              {words}&nbsp;
+            </motion.span>
           ))}
         </motion.p>
       </motion.div>
