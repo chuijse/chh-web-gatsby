@@ -1,0 +1,17 @@
+@import "../abstract/color";
+
+.hola {
+  position: relative;
+  width: max-content;
+}
+
+.textHola {
+  display: flex;
+  font-family: "Roboto Mono";
+  font-weight: 500;
+  font-size: 5rem;
+  color: $colorBlack;
+  line-height: 4rem;
+  margin: 0%;
+  text-justify: inter-word;
+}

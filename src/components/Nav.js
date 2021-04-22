@@ -25,7 +25,7 @@ const NavLink = (props) => {
     return isCurrent ? { className: "activeNav" } : {};
   };
 
-  return props.isPartially ? (
+  return props.ispartially === "true" ? (
     <Link getProps={isPartiallyTrue} {...props} />
   ) : (
     <Link getProps={isPartiallyFalse} {...props} />
@@ -53,7 +53,7 @@ export default function Nav() {
             <div ref={inputRef1}>
               <NavLink
                 to="/"
-                isPartially={false}
+                ispartially="false"
                 onActive={() => setPosition(inputRef1)}
               >
                 About
@@ -69,7 +69,7 @@ export default function Nav() {
             <div ref={inputRef2}>
               <NavLink
                 to="/projects/"
-                isPartially={true}
+                ispartially="true"
                 onActive={() => setPosition(inputRef2)}
               >
                 Projects
@@ -85,7 +85,7 @@ export default function Nav() {
             <div ref={inputRef3}>
               <NavLink
                 to="/teaching/"
-                isPartially={true}
+                ispartially="true"
                 onActive={() => setPosition(inputRef3)}
               >
                 Teaching
@@ -101,7 +101,7 @@ export default function Nav() {
             <div ref={inputRef4}>
               <NavLink
                 to="/blog/"
-                isPartially={true}
+                ispartially="true"
                 onActive={() => setPosition(inputRef4)}
               >
                 blog
@@ -117,7 +117,7 @@ export default function Nav() {
             <div ref={inputRef5}>
               <NavLink
                 to="/contact/"
-                isPartially={false}
+                ispartially="false"
                 onActive={() => setPosition(inputRef5)}
               >
                 Contact
