@@ -1,6 +1,13 @@
 @import "./sections/topbar";
 @import "./sections/about";
+@import "./sections/blog";
+@import "./sections/courses";
+@import "./sections/teaching";
 
 body {
   margin: 0px;
+}
+
+a {
+  text-decoration: none;
 }

@@ -1,0 +1,16 @@
+@use "./card";
+@import "../abstract/color";
+
+.card_UDD {
+  @include card.card;
+  background-color: $colorSecondary;
+
+  .cardBackground {
+    .cardAbstract {
+      background-color: $colorUDD;
+    }
+  }
+  .cardCategory {
+    color: $colorUDD;
+  }
+}

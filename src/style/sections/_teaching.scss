@@ -1,0 +1,27 @@
+@import "../abstract/fonts";
+@import "../component/cardUdd";
+@import "../component/cardUdp";
+@import "../component/card";
+
+.mainTeaching {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+
+  .intro {
+    display: flex;
+    width: max-content;
+    margin-top: 100px;
+  }
+}
+
+.teachingGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(300px, 400px));
+  padding: 20px;
+  grid-gap: 40px 40px;
+  grid-auto-flow: row dense;
+  margin-top: 10px;
+  margin-bottom: 100px;
+}

@@ -1,0 +1,43 @@
+@import "../abstract/color";
+@import "../abstract/fonts";
+
+.marginButton {
+  margin-top: 15px;
+  .button {
+    display: grid;
+    background-color: $colorBlack;
+    height: 100%;
+    width: 100%;
+    transition: width 1s;
+    grid-template-columns: 2.5% 77.5% 20%;
+
+    .block {
+      grid-column: 1, 2;
+      background-color: $colorPrimary;
+      height: 100%;
+      width: 100%;
+    }
+    .name {
+      grid-column: 2, 3;
+      padding-left: 20px;
+      text-transform: uppercase;
+      font-family: "Roboto Mono";
+      font-weight: 500;
+      font-size: 0.9rem;
+      width: max-content;
+      color: $colorWhite;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .arrow {
+      grid-column: 3, 4;
+      justify-self: center;
+      align-self: center;
+      img {
+        width: 40px;
+        margin: auto;
+      }
+    }
+  }
+}

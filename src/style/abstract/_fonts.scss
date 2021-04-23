@@ -7,17 +7,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&display=swap");
 
 h1 {
-  font-family: "Overpass Mono";
-  font-weight: 700;
+  font-family: "Roboto";
+  font-weight: 900;
   font-size: 4.5rem;
   color: $colorBlack;
   line-height: 4rem;
 }
 
 h2 {
-  font-family: "Overpass Mono";
-  font-size: 72;
+  font-family: "Roboto Mono";
+  font-weight: 500;
+  font-size: 2rem;
   color: $colorPrimary;
+}
+
+h3 {
+  font-family: "Roboto";
+  font-weight: 800;
+  font-size: 1.4rem;
 }
 
 .textYellow {

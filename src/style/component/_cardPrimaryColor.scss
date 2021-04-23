@@ -1,0 +1,13 @@
+@use "./card";
+@import "../abstract/color";
+
+.card_primaryColor {
+  @include card.card;
+  background-color: $colorPrimary;
+
+  .cardBackground {
+    .cardAbstract {
+      background-color: $colorPrimary;
+    }
+  }
+}

@@ -1,0 +1,70 @@
+@import "../abstract/color";
+@import "../abstract/fonts";
+
+@mixin card {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: 20% 65% 15%;
+  max-width: 100%;
+  height: 550px;
+  background-color: $colorPrimary;
+  //box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 5px 10px 0 rgba(0, 0, 0, 0.3);
+
+  .cardTitle {
+    grid-area: 1 / 1 / 2 / 3;
+    color: $colorWhite;
+    padding-left: 20px;
+    padding-right: 20px;
+    align-self: center;
+
+    .subtitle {
+      font-family: "Roboto Mono";
+      font-weight: 400;
+      font-size: 1rem;
+      text-decoration: none;
+    }
+  }
+
+  .cardBackground {
+    grid-area: 2/ 1 / 3 / 3;
+    background-color: $colorBlack;
+    background-blend-mode: luminosity;
+    background-size: auto;
+    background-position: center;
+    background-size: cover;
+
+    .cardAbstract {
+      padding-top: 2%;
+      height: 100%;
+      grid-area: 2/ 1 / 3 / 3;
+      color: $colorWhite;
+      //background-color: rgba(255, 127, 42, 0.9);
+      //background-color: rgba(0, 0, 0, 0.9);
+      background-color: $colorPrimary;
+      font-family: "Roboto Mono";
+      padding-left: 20px;
+      padding-right: 20px;
+      font-weight: 500;
+      font-size: 1rem;
+      text-align: justify;
+      text-justify: inter-character;
+    }
+  }
+
+  .cardCategory {
+    padding-left: 20px;
+    grid-area: 3 / 1 / 4 / 2;
+    color: $colorWhite;
+    font-family: "Roboto Mono";
+    font-weight: 500;
+    font-size: 1rem;
+    align-self: center;
+  }
+
+  .cardArrow {
+    grid-area: 3 / 2 / 4 / 3;
+    color: $colorWhite;
+    align-self: center;
+    justify-self: center;
+  }
+}
