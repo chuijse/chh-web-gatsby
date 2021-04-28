@@ -9,10 +9,10 @@
   justify-content: center;
   width: 100%;
 
-  .layout {
+  .layoutCourse {
     display: flex;
     flex-direction: column;
-    width: max-content;
+    width: 1300px;
     margin-top: 100px;
   }
 }
@@ -32,13 +32,13 @@
   margin-top: 20px;
   margin-bottom: 50px;
 
-  .stats {
-    .item {
+  .courseStats {
+    .courseItem {
       width: 300px;
       padding-right: 20px;
-      padding-bottom: 30px;
+      padding-bottom: 20px;
 
-      .content {
+      .courseContent {
         padding: 15px;
         color: $colorWhite;
         background: $colorSecondary;
@@ -50,8 +50,21 @@
     }
   }
 
-  .info {
+  .courseBody {
     //border-left: 2px solid $colorGray;
-    padding-left: 20px;
+    width: 100%;
+    border: 1px solid red;
+  }
+}
+
+.galleryGrid {
+  display: grid;
+  border: 1px solid black;
+  width: 100%;
+  grid-template-rows: auto;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+
+  .galleryItem {
+    justify-items: stretch;
   }
 }

@@ -32,7 +32,7 @@ export const query = graphql`
         }
         mainImage {
           asset {
-            gatsbyImageData(fit: FILLMAX, placeholder: BLURRED)
+            gatsbyImageData
           }
         }
       }

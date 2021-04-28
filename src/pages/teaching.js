@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
+import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
 import Card from "../components/Card";
 
 export default function Teaching({ data }) {
@@ -31,26 +31,17 @@ export default function Teaching({ data }) {
                     }
                     title={course.title}
                     mainImage={course.mainImage.asset.gatsbyImageData}
+                    mainCaption={course.mainImage.caption}
                     university={course.universities.name}
                     abstract={course.abstract}
                     year={course.year}
                     semester={course.semester}
                   ></Card>
-                  <p>{course.mainImage.asset.path}</p>
                 </Link>
               </span>
             ))}
           </div>
         )}
-
-        {/*{courses.map((Course) => (
-        <span key={Course.id}>
-          <Link to={`/teaching/${Course.slug.current}`}>{Course.title}</Link>
-          <GatsbyImage
-            image={Course.mainImage.asset.gatsbyImageData}
-          ></GatsbyImage>
-        </span>
-      ))}*/}
       </div>
     </>
   );
@@ -72,6 +63,7 @@ export const query = graphql`
           acronym
         }
         mainImage {
+          caption
           asset {
             gatsbyImageData(fit: FILLMAX, placeholder: BLURRED)
             path

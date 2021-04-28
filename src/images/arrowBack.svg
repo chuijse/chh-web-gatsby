@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="24px"
+   viewBox="0 0 24 24"
+   width="24px"
+   fill="#000000"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="arrowBack.svg"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)">
+  <metadata
+     id="metadata12">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs10">
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter1243"
+       x="-0.19862914"
+       width="1.3972583"
+       y="-0.11707082"
+       height="1.2341416">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.96583422"
+         id="feGaussianBlur1245" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1408"
+     inkscape:window-height="829"
+     id="namedview8"
+     showgrid="false"
+     inkscape:zoom="22.691787"
+     inkscape:cx="12"
+     inkscape:cy="12"
+     inkscape:window-x="2430"
+     inkscape:window-y="142"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg6" />
+  <path
+     d="M0 0h24v24H0V0z"
+     fill="none"
+     opacity=".87"
+     id="path2" />
+  <path
+     d="M 17.835,3.8700003 16.055,2.1000002 6.1649997,12 16.065,21.9 17.835,20.13 9.7049998,12 Z"
+     id="path837"
+     style="fill:#000000;stroke:none;filter:url(#filter1243)" />
+  <path
+     d="M 17.835,3.8700003 16.055,2.1000002 6.1649997,12 16.065,21.9 17.835,20.13 9.7049998,12 Z"
+     id="path841"
+     style="fill:#ffffff;stroke:none" />
+</svg>
