@@ -112,7 +112,7 @@ export const query = graphql`
       }
       imageGallery {
         asset {
-          thumb: gatsbyImageData(placeholder: BLURRED, fit: CLIP, width: 200)
+          thumb: gatsbyImageData(placeholder: BLURRED, fit: CLIP)
           high: gatsbyImageData(fit: SCALE, placeholder: BLURRED)
         }
         caption

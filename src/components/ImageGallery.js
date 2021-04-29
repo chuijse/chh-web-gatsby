@@ -1,16 +1,14 @@
 import React, { Component, Fragment, useState } from "react";
 import Seo from "../components/Seo";
 import { motion } from "framer-motion";
-import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
+import { GatsbyImage } from "gatsby-plugin-image";
 import { Dialog } from "@reach/dialog";
-
 import ArrowBack from "../images/arrowBack.svg";
 import ArrowForward from "../images/arrowForward.svg";
 import Close from "../images/close.svg";
+import GalleryItem from "./GalleryItem";
 
 export default function ImageGaller(props) {
-  console.log(`esto es la galeria ${props.gallery}`);
-
   const [lightbox, setLightBox] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -24,16 +22,9 @@ export default function ImageGaller(props) {
     <>
       <div className="galleryGrid">
         {props.gallery?.map((image, index) => (
-          <div
-            key={index}
-            onClick={() => openLighBox(image, index)}
-            className="galleryItem"
-          >
-            <GatsbyImage
-              image={image.asset.thumb}
-              alt={image.caption}
-            ></GatsbyImage>
-          </div>
+          <span key={index} onClick={() => openLighBox(image, index)}>
+            <GalleryItem image={image} index={index} />
+          </span>
         ))}
       </div>
       {lightbox && (

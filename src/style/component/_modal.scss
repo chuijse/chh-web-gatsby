@@ -12,6 +12,7 @@
   left: 0;
   bottom: 0;
   overflow: auto;
+  z-index: 10;
 }
 
 [data-reach-dialog-content] {
@@ -19,19 +20,20 @@
   max-height: 90%;
   outline: none;
   max-width: 1200px;
+  z-index: 10;
 }
 
 .GridDialog {
   display: grid;
   width: 100%;
   grid-template-rows: 50px auto auto 60px;
-  grid-template-columns: 60px auto auto 60px;
+  grid-template-columns: 100px auto auto 100px;
 }
 
 .closeItem {
   display: flex;
   grid-area: 4 / 4 / 5 / 5;
-  z-index: 7;
+  z-index: 12;
   align-items: center;
   justify-content: flex-end;
   cursor: pointer;
@@ -45,7 +47,7 @@
 .leftItem {
   display: flex;
   grid-area: 1 / 1 / 5 / 2;
-  z-index: 3;
+  z-index: 12;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -58,7 +60,7 @@
 
 .rightItem {
   grid-area: 2 / 4 / 4 / 5;
-  z-index: 3;
+  z-index: 12;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -72,11 +74,10 @@
 
 .infoItem {
   grid-area: 4 / 1 / 5 / 5;
-  z-index: 3;
   color: $colorWhite;
   font-family: "Roboto";
   .captionNunmber {
-    margin-top: 6px;
+    margin-top: 8px;
     font-size: 1.1rem;
     font-weight: 400;
 
@@ -92,6 +93,6 @@
 .dialogImageItem {
   position: absolute;
   grid-area: 1 / 1 / 4 / 5;
-  z-index: 1;
-  border: 4px solid white;
+  z-index: 5;
+  border: 5px solid white;
 }
