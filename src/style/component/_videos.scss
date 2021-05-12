@@ -1,0 +1,47 @@
+@import "../abstract/fonts";
+
+.videosContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  .oneVideoitem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    video {
+      width: 100%;
+    }
+  }
+
+  .twoVideoitem {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    video {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+    }
+  }
+
+  .threeVideoitem {
+    width: 30.6%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    video {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+  }
+}

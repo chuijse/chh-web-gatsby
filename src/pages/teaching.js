@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
-import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
 import Card from "../components/Card";
 
 export default function Teaching({ data }) {
@@ -27,12 +26,14 @@ export default function Teaching({ data }) {
                         ? "card_UDD"
                         : course.universities.acronym === "UDP"
                         ? "card_UDP"
+                        : course.universities.acronym === "UACH"
+                        ? "card_UACH"
                         : null
                     }
                     title={course.title}
                     mainImage={course.mainImage.asset.gatsbyImageData}
                     mainCaption={course.mainImage.caption}
-                    university={course.universities.name}
+                    university={course.universities.acronym}
                     abstract={course.abstract}
                     year={course.year}
                     semester={course.semester}

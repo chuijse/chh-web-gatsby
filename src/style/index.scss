@@ -4,6 +4,7 @@
 @import "./sections/courses";
 @import "./sections/teaching";
 @import "./component/modal";
+@import "./abstract/fonts";
 
 body {
   margin: 0px;
@@ -11,4 +12,12 @@ body {
 
 a {
   text-decoration: none;
+}
+
+figure {
+  margin: 0px;
+  width: 100%;
+  img {
+    width: 100%;
+  }
 }

@@ -6,7 +6,7 @@ const Button = (props) => {
   const [active, setactive] = useState(false);
   return (
     <>
-      <a href={props.link}>
+      <a href={props.link} target="_blank" rel="noopener noreferrer">
         <motion.div
           onHoverStart={() => setactive(true)}
           onHoverEnd={() => setactive(false)}

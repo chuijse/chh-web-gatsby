@@ -1,0 +1,9 @@
+@import "../abstract/color";
+@import "../abstract/fonts";
+
+.blockImage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}

@@ -1,16 +1,16 @@
 @use "./card";
 @import "../abstract/color";
 
-.card_UACH {
+.card_UDP {
   @include card.card;
   background-color: $colorSecondary;
 
   .cardBackground {
     .cardAbstract {
-      background-color: $colorUACH;
+      background-color: $colorUDP;
     }
   }
   .cardCategory {
-    color: $colorUACH;
+    color: $colorUDP;
   }
 }

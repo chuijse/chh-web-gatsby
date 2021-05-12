@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useState } from "react";
+import React, { useState } from "react";
 import Seo from "../components/Seo";
 import { motion } from "framer-motion";
 import { GatsbyImage } from "gatsby-plugin-image";
@@ -20,6 +20,7 @@ export default function ImageGaller(props) {
 
   return (
     <>
+      <h4>Galería de imagenes</h4>
       <div className="galleryGrid">
         {props.gallery?.map((image, index) => (
           <span key={index} onClick={() => openLighBox(image, index)}>

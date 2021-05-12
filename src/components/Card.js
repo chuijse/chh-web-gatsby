@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import flechahorizontal from "../images/flechaHorizontal.svg";
 import flechaHorizontalB from "../images/flechaHorizontalB.svg";
 import { AnimatePresence, motion } from "framer-motion";
-import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 const Card = (props) => {
   const [active, setactive] = useState(false);
@@ -45,7 +45,7 @@ const Card = (props) => {
             </AnimatePresence>
           </div>
           <div className="cardCategory">
-            <span>{props.university}</span>
+            <h4>{props.university}</h4>
           </div>
           <AnimatePresence>
             {active ? (

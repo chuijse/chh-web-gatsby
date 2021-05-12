@@ -56,13 +56,15 @@
   }
 
   .cardCategory {
+    margin-bottom: 0px;
     padding-left: 20px;
     grid-area: 3 / 1 / 4 / 2;
-    color: $colorWhite;
-    font-family: "Roboto Mono";
-    font-weight: 500;
-    font-size: 1rem;
     align-self: center;
+    h4 {
+      margin-bottom: 0px;
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
   }
 
   .cardArrow {

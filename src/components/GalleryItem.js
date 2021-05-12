@@ -1,6 +1,6 @@
-import React, { Component, Fragment, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
+import { GatsbyImage } from "gatsby-plugin-image";
 import GoArrow from "../images/goArrow.svg";
 
 const ImageGallerItem = (props) => {

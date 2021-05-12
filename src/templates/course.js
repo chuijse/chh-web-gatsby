@@ -2,9 +2,8 @@ import React from "react";
 import { graphql } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 import Button from "../components/Button";
-import BlockContent from "@sanity/block-content-to-react";
+import PortableText from "../components/PortableText";
 import ImageGallery from "../components/ImageGallery";
-import { serializers } from "@sanity/block-content-to-react/lib/targets/dom";
 
 const CourseArticle = ({ data }) => {
   //const { data, errors } = props;
@@ -59,7 +58,10 @@ const CourseArticle = ({ data }) => {
             <div className="courseBody">
               <h4>Description del curso</h4>
               {course._rawBody && (
-                <BlockContent blocks={course._rawBody}></BlockContent>
+                <PortableText
+                  blocks={course._rawBody}
+                  imageOptions={{ fit: "max" }}
+                ></PortableText>
               )}
               {/*{course.imageGallery.map((image, index) => (
                 <span key={index}>
