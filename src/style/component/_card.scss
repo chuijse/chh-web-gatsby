@@ -30,10 +30,10 @@
 
     .cardMainImage {
       grid-area: 2/ 1 / 3 / 3;
-      justify-self: center;
-      background-color: $colorBlack;
-      background-blend-mode: luminosity;
-      filter: grayscale(1);
+      //justify-self: center;
+      //background-color: $colorBlack;
+      //background-blend-mode: luminosity;
+      //filter: grayscale(1);
       height: 100%;
     }
 

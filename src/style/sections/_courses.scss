@@ -7,6 +7,7 @@
 @import "../component/imageGallery";
 @import "../component/videoEmbed";
 @import "../component/blockImage";
+@import "../abstract/responsive";
 
 .mainCourse {
   display: flex;
@@ -16,33 +17,57 @@
   .layoutCourse {
     display: flex;
     flex-direction: column;
-    width: 1300px;
+    max-width: 1300px;
     margin-top: 100px;
   }
 }
 
-.teachingGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(300px, 400px));
-  padding: 20px;
-  grid-gap: 40px 40px;
-  grid-auto-flow: row dense;
-  margin-top: 10px;
-  margin-bottom: 100px;
-}
-
 .courseInfo {
   display: flex;
+  flex-direction: column-reverse;
   margin-top: 20px;
   margin-bottom: 50px;
 
+  @include desktop {
+    flex-direction: row;
+  }
+
   .courseStats {
+    display: flex;
+    flex-direction: column;
+
+    @include tablet {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    @include desktop {
+      flex-direction: column;
+      position: sticky;
+      margin-right: 20px;
+      justify-content: flex-start;
+    }
     .courseItem {
-      width: 300px;
-      padding-right: 20px;
-      padding-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      @include tablet {
+        width: 49%;
+        flex-direction: row;
+        padding-bottom: 20px;
+      }
+
+      @include desktop {
+        width: 100%;
+        flex-direction: column;
+        padding-bottom: 20px;
+      }
 
       .courseContent {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 2;
         padding: 15px;
         color: $colorWhite;
         background: $colorSecondary;

@@ -1,121 +1,85 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { StaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql } from "gatsby";
+import { useLocation } from "@reach/router";
 
-const Seo = ({
-  globaltitle,
-  description,
-  keywords,
-  title,
-  image,
-  url,
-  author,
-  year,
-  linkedin,
-  github,
-}) => {
+const Seo = ({ description, keywords, title, image, article }) => {
+  const { pathname } = useLocation();
+  const { site } = useStaticQuery(query);
+
+  const {
+    defaultTitle,
+    titleTemplate,
+    defaultDescription,
+    siteUrl,
+    defaultImage,
+    year,
+    author,
+    linkedin,
+    github,
+    defaultKeywords,
+  } = site.siteMetadata;
+
+  const seo = {
+    title: title || defaultTitle,
+    description: description || defaultDescription,
+    image: image || defaultImage,
+    url: `${siteUrl}${pathname}`,
+    year: year,
+    author: author,
+    linkedin: linkedin,
+    github: github,
+    keywords: defaultKeywords,
+  };
+
+  const totalMetaKewords = keywords
+    ? seo.keywords.join(`, `) + `, ` + keywords.join(`, `)
+    : seo.keywords.join(`, `);
+
   return (
-    <StaticQuery
-      query={detailsQuery}
-      render={(data) => {
-        const metaDescription =
-          description || data.site.siteMetadata.description;
-        const metaTitle = title || data.site.siteMetadata.title;
-        const metaYear = year || data.site.siteMetadata.year;
-        const metaUrl = url || data.site.siteMetadata.url;
-        //const metaImage = image || data.site.siteMetadata.image
-        const metaAuthor = author || data.site.siteMetadata.author;
-        const metalinkedin = linkedin || data.site.siteMetadata.linkedin;
-        const metaGithub = github || data.site.siteMetadata.github;
-        const metaKewords = keywords || [
-          "CHH",
-          "Cristian",
-          "Huijse",
-          "Heise",
-          "Diseño Industrial",
-          "Industrial Design",
-          "Interacción digital",
-          "Digital Interaction Design",
-          "Interacción Física",
-          "Physical Interaction",
-          "ux",
-          "ui",
-          "diseño web",
-          "Web Design",
-          "diseño",
-          "Design",
-          "Modelado 3d",
-          "3d modeling",
-          "Programming",
-          "porgramación",
-        ];
-        const totalMetaKewords = metaKewords.join(`, `);
+    <Helmet title={seo.title} titleTemplate={titleTemplate}>
+      <meta name="description" content={seo.description} />
+      <meta name="image" content={seo.image} />
+      <meta name="year" content={seo.year} />
+      <meta name="author" content={seo.author} />
+      <meta name="linkedin" content={seo.linkedin} />
+      <meta name="github" content={seo.github} />
+      <meta name="keywords" content={totalMetaKewords} />
 
-        return (
-          <Helmet
-            title={`${metaTitle} | CHH`}
-            meta={[
-              {
-                name: `description`,
-                content: metaDescription,
-              },
-              {
-                name: `og:title`,
-                content: `${metaTitle} | CHH`,
-              },
-              {
-                property: `og:description`,
-                content: metaDescription,
-              },
-              {
-                property: `og:url`,
-                content: metaUrl,
-              },
-              {
-                property: `og:type`,
-                content: `website`,
-              },
-              {
-                property: `og:author`,
-                content: metaAuthor,
-              },
-              {
-                name: `year`,
-                content: metaYear,
-              },
-              {
-                name: `kewords`,
-                content: totalMetaKewords,
-              },
-              {
-                name: `linkedin`,
-                content: metalinkedin,
-              },
-              {
-                name: `github`,
-                content: metaGithub,
-              },
-            ]}
-          />
-        );
-      }}
-    />
+      <meta property="og:url" content={seo.url} />
+      {article ? (
+        <meta property="og:type" content="article" />
+      ) : (
+        <meta property="og:type" content="website" />
+      )}
+      <meta property="og:title" content={seo.title + " | CHH"} />
+      <meta property="og:description" content={seo.description} />
+      <meta property="og:author" content={seo.author} />
+      <meta property="og: image" content={seo.image} />
+
+      <meta name="twitter:title" content={seo.title + " | CHH"} />
+      <meta name="twitter:description" content={seo.description} />
+      {image && <meta name="twitter:image" content={seo.image} />}
+    </Helmet>
   );
 };
 
-export default Seo;
-
-const detailsQuery = graphql`
-  query DefaulySEOQuery {
+const query = graphql`
+  query SEO {
     site {
       siteMetadata {
+        defaultTitle: title
+        titleTemplate
+        defaultDescription: description
+        siteUrl: url
+        defaultImage: image
         author
-        title
-        description
         year
         github
         linkedin
+        defaultKeywords: keywords
       }
     }
   }
 `;
+export default Seo;

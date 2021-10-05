@@ -1,19 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Seo from "../components/Seo";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import SlidingAnimation from "../components/SlidingAnimation";
 
-export default function Projects() {
+export default function Projects({ right }) {
   return (
-    <>
-      <Seo title="Projects" />
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
-        Projects
-      </motion.div>
-    </>
+    <React.Fragment>
+      <SlidingAnimation right={right}>
+        <React.Fragment>
+          <Seo title="Projects" keywords={["projects"]} />
+          <div
+            style={{
+              width: "80vw",
+              margin: "auto",
+              height: "100vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <h1>Projects</h1>
+          </div>
+        </React.Fragment>
+      </SlidingAnimation>
+    </React.Fragment>
   );
 }

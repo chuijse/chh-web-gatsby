@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export function Picker(props) {
   const [open, setOpen] = useState(false);
@@ -19,7 +19,7 @@ export function Picker(props) {
 
   return (
     <React.Fragment>
-      <div onClick={() => handleChange()}>
+      <button onClick={() => handleChange()} className="pickerRoot">
         <div className="picker">
           <motion.div
             className="triangle"
@@ -41,7 +41,7 @@ export function Picker(props) {
             {open && props.children}
           </motion.ul>
         </motion.nav>
-      </div>
+      </button>
     </React.Fragment>
   );
 }
@@ -50,12 +50,15 @@ export function PickerItem(props) {
   return (
     <React.Fragment>
       {props.name === props.filter ? null : (
-        <li
-          onClick={() => {
-            props.onSelect(props.name);
-          }}
-        >
-          {props.name}
+        <li>
+          <button
+            className="categoryButton"
+            onClick={() => {
+              props.onSelect(props.name);
+            }}
+          >
+            {props.name}
+          </button>
         </li>
       )}
     </React.Fragment>

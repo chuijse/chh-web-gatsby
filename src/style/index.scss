@@ -1,4 +1,4 @@
-@import "./sections/topbar";
+@import "./sections/layout";
 @import "./sections/about";
 @import "./sections/blog";
 @import "./sections/courses";
@@ -8,6 +8,7 @@
 
 body {
   margin: 0px;
+  overflow-x: hidden;
 }
 
 a {

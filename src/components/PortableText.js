@@ -1,11 +1,16 @@
 import React from "react";
 import BlockContent from "@sanity/block-content-to-react";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 const serializers = {
   types: {
     blockImage: (props) => (
       <div className="blockImage">
-        <img src={props.node.photo.asset.url} alt={props.node.caption}></img>
+        <img
+          width="100%"
+          src={props.node.photo.asset.url}
+          alt={props.node.caption}
+        ></img>
         <p className="caption">{props.node.caption}</p>
       </div>
     ),
@@ -13,6 +18,7 @@ const serializers = {
     videoEmbed: (props) => (
       <div className="videoEmbedContainer">
         <iframe
+          title={props.node.caption}
           width="100%"
           height="500px"
           src={props.node.videoUrl}
@@ -117,8 +123,8 @@ const serializers = {
   },
 };
 
-const PortableText = ({ blocks }) => (
-  <BlockContent blocks={blocks} serializers={serializers} />
-);
+const PortableText = ({ blocks }) => {
+  return <BlockContent blocks={blocks} serializers={serializers} />;
+};
 
 export default PortableText;

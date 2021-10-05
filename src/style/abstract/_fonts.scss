@@ -6,23 +6,34 @@
 @import url("https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&display=swap");
 @import "./color";
+@import "./responsive";
 
 h1 {
   font-family: "Roboto";
   font-weight: 900;
-  font-size: 4.8rem;
+  font-size: 3rem;
   color: $colorBlack;
-  line-height: 4rem;
-  margin-bottom: 1rem;
+  line-height: 2.5rem;
+  margin-bottom: 0.5rem;
+  @include tablet {
+    font-size: 4.8rem;
+    line-height: 4rem;
+    margin-bottom: 1rem;
+  }
 }
 
 h2 {
   font-family: "Roboto Mono";
   font-weight: 500;
-  font-size: 1.75rem;
+  font-size: 1.3rem;
   color: $colorPrimary;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+  @include tablet {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
 h3 {
@@ -35,7 +46,7 @@ h3 {
 
 h4 {
   font-family: "Roboto Mono";
-  font-weight: 400;
+  font-weight: 700;
   font-size: 1.7rem;
   margin-top: 0px;
   margin-bottom: 0.5rem;
@@ -82,8 +93,18 @@ strong {
   display: flex;
 }
 
-.caption {
+@mixin caption {
   margin-top: 10px;
   font-size: 0.8rem;
   font-family: "Roboto Mono";
+}
+
+.caption {
+  @include caption;
+}
+
+.white-caption {
+  @include caption;
+  color: white;
+  font-size: 0.9rem;
 }

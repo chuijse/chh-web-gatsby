@@ -1,26 +1,82 @@
 @import "../abstract/color";
 @import "../abstract/fonts";
 
-.nav {
-  width: max-content;
+.topBar {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  z-index: 100;
+}
 
-  li {
-    display: inline-block;
-    padding-left: 10px;
-    font-family: "Share Tech Mono", monospace;
-    font-size: 1.5rem;
-    color: $colorGray;
+.line {
+  width: 90%;
+  margin-top: 20px;
+  margin-left: 5%;
+  height: 2px;
+  background: $colorGray;
+}
 
-    a {
-      text-decoration: none;
-      text-transform: uppercase;
+.navLogo {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.logo {
+  margin-top: 10px;
+  img {
+    padding-right: 12px;
+  }
+}
+.layoutNav {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  //border: 1px solid red;
+
+  ul {
+    //border: 1px solid blue;
+    display: flex;
+    align-items: flex-end;
+    padding: 0;
+    margin: 0;
+
+    li {
+      display: flex;
+      //border: 1px solid green;
       font-family: "Share Tech Mono", monospace;
-      font-size: 1.5rem;
-      color: $colorBlack;
+      font-size: 1.1rem;
+      margin-left: 10px;
+
+      color: $colorGray;
     }
   }
 }
 
-.activeNav {
-  color: $colorPrimary !important;
+.navButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 1.45rem;
+  color: $colorBlack;
+  cursor: pointer;
+}
+
+.activeNavButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 1.45rem;
+  color: $colorPrimary;
+  cursor: pointer;
 }

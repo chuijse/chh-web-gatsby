@@ -5,12 +5,13 @@ import "../style/index.scss";
 import Arrow from "../components/about/Arrow";
 import Hola from "../components/about/Hola";
 import IntroText from "../components/about/IntroText";
+import SlidingAnimation from "../components/SlidingAnimation";
 
-export default function Home(props) {
+export default function Home({ right }) {
   return (
-    <>
-      <Seo />
-      <motion.div exit={{ opacity: 0 }}>
+    <React.Fragment>
+      <SlidingAnimation right={right}>
+        <Seo />
         <div className="workIntro">
           <div className="layout">
             <Hola />
@@ -35,7 +36,7 @@ export default function Home(props) {
             </motion.div>
           </div>
         </div>
-      </motion.div>
-    </>
+      </SlidingAnimation>
+    </React.Fragment>
   );
 }

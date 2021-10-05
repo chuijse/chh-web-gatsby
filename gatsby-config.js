@@ -1,6 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: "Cristian Huijse Portfolio",
+    titleTemplate: "%s | CHH",
     description:
       "This is the professional web dev portfolio of Cristian Huijse.",
     year: "2021",
@@ -8,6 +9,29 @@ module.exports = {
     github: "https://github.com/chuijse",
     linkedin: "https://www.linkedin.com/in/cristianhuijse/",
     url: "http://chh.work",
+    image: "/images/logoSeo.png",
+    keywords: [
+      "CHH",
+      "Cristian",
+      "Huijse",
+      "Heise",
+      "Diseño Industrial",
+      "Industrial Design",
+      "Interacción digital",
+      "Digital Interaction Design",
+      "Interacción Física",
+      "Physical Interaction",
+      "ux",
+      "ui",
+      "diseño web",
+      "Web Design",
+      "diseño",
+      "Design",
+      "Modelado 3d",
+      "3d modeling",
+      "Programming",
+      "porgramación",
+    ],
   },
   plugins: [
     {
@@ -17,12 +41,7 @@ module.exports = {
         dataset: "chh-web-api",
       },
     },
-    {
-      resolve: `gatsby-plugin-layout`,
-      options: {
-        component: require.resolve(`./src/components/Layout`),
-      },
-    },
+
     "gatsby-plugin-sass",
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",

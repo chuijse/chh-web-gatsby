@@ -3,12 +3,12 @@ import { graphql } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 import Button from "../components/Button";
 import PortableText from "../components/PortableText";
-import ImageGallery from "../components/ImageGallery";
+import ImageGallery from "../components/ImageGalleryCopy";
 
 const CourseArticle = ({ data }) => {
   //const { data, errors } = props;
   //const post = data && data.post;
-  const course = data.sanityCourses;
+  const course = data?.sanityCourses;
   //console.log(`${course} esto es course`);
   return (
     <>
@@ -58,10 +58,7 @@ const CourseArticle = ({ data }) => {
             <div className="courseBody">
               <h4>Description del curso</h4>
               {course._rawBody && (
-                <PortableText
-                  blocks={course._rawBody}
-                  imageOptions={{ fit: "max" }}
-                ></PortableText>
+                <PortableText blocks={course._rawBody}></PortableText>
               )}
               {/*{course.imageGallery.map((image, index) => (
                 <span key={index}>
@@ -114,8 +111,9 @@ export const query = graphql`
       }
       imageGallery {
         asset {
-          thumb: gatsbyImageData(placeholder: BLURRED, fit: CLIP)
+          thumb: gatsbyImageData(placeholder: BLURRED)
           high: gatsbyImageData(fit: SCALE, placeholder: BLURRED)
+          url
         }
         caption
       }

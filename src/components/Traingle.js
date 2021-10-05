@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-const Triangle = (props) => {
+const Triangle = ({ xPosition }) => {
   const [position, setPosition] = useState(0);
 
   const updatePosition = () => {
-    if (props.xPosition.current) {
-      let xi = props.xPosition;
-      const object = xi.current.getBoundingClientRect();
+    if (xPosition) {
+      let xi = xPosition;
+      const object = xi.getBoundingClientRect();
       const x = object.x + object.width / 2 - 15;
       setPosition(x);
     }
   };
 
-  useEffect(updatePosition, [props.xPosition, position]);
+  useEffect(updatePosition, [xPosition, position]);
 
   useEffect(() => {
     window.addEventListener("resize", updatePosition, true);
@@ -26,7 +26,15 @@ const Triangle = (props) => {
         className="triangle"
         initial={{ x: 0, opacity: 0 }}
         animate={{ x: position, opacity: 1 }}
-        transition={{ duration: 0.8 }}
+        transition={{
+          type: "spring",
+
+          mass: 1,
+
+          stiffness: 50,
+
+          duration: 1,
+        }}
       />
     </>
   );

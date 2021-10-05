@@ -10,7 +10,6 @@ const BlogArticle = ({ data }) => {
   return (
     <>
       <h1>{post.title}</h1>
-      <GatsbyImage image={post.mainImage.asset.gatsbyImageData} />
     </>
   );
 };

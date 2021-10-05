@@ -12,7 +12,6 @@ const Card = (props) => {
       <motion.div
         onHoverStart={() => setactive(true)}
         onHoverEnd={() => setactive(false)}
-        whileHover={{ scale: 1.1 }}
       >
         <div className={props.color}>
           <div className="cardTitle">
@@ -30,8 +29,13 @@ const Card = (props) => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  <motion.div initial={{ y: 100 }} animate={{ y: 0 }}>
+                  <motion.div
+                    initial={{ y: 50 }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 0.5 }}
+                  >
                     {props.abstract}
                   </motion.div>
                 </motion.div>
