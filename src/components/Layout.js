@@ -1,15 +1,17 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "./Nav";
-import NavCopy from "./NavCopy";
-import { motion, AnimatePresence } from "framer-motion";
-import { OnRouteUpdate } from "../../gatsby-browser";
-import { globalHistory } from "@reach/router";
+import { AnimatePresence } from "framer-motion";
+
+import { useMediaQuery } from "react-responsive";
 
 const historyPathId = [];
 
 function Layout(props) {
   const [pathId, setPathId] = useState(null);
   const [right, setRight] = useState(null);
+
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 });
+  const isMobil = useMediaQuery({ minWidth: 768 });
 
   useEffect(() => {
     historyPathId.unshift(pathId);
@@ -25,10 +27,16 @@ function Layout(props) {
 
   return (
     <div className="layout">
-      {/* <Nav setPathId={setPathId} currentUrl={props.location.pathname} />*/}
-      <NavCopy setPathId={setPathId} currentUrl={props.location.pathname} />
+      <Nav
+        setPathId={setPathId}
+        currentUrl={props.location.pathname}
+        isMobil={isMobil}
+      />
+
       <AnimatePresence exitBeforeEnter>
-        {React.cloneElement(props.children, { right: right })}
+        {React.cloneElement(props.children, {
+          right: right,
+        })}
       </AnimatePresence>
     </div>
   );

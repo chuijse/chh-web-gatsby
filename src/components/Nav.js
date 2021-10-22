@@ -1,105 +1,111 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Link, navigate } from "gatsby";
-import { globalHistory } from "@reach/router";
-import Triangle from "./Traingle";
+import { navigate } from "gatsby";
 import Logo from "./Logo";
+import { motion, AnimateSharedLayout } from "framer-motion";
 
 const routes = [
-  { name: "About", path: "/", partialy: false, id: 0 },
-  { name: "Projects", path: "/projects", partialy: true, id: 1 },
-  { name: "Teaching", path: "/teaching", partialy: true, id: 2 },
-  { name: "blog", path: "/blog", partialy: true, id: 3 },
-  { name: "contact", path: "/contact", partialy: false, id: 4 },
+  { name: "About", path: "/", partialy: false },
+  { name: "Projects", path: "/projects", partialy: true },
+  { name: "Teaching", path: "/teaching", partialy: true },
+  { name: "blog", path: "/blog", partialy: true },
+  { name: "contact", path: "/contact", partialy: false },
 ];
 
-export default function Nav({ setPathId, currentUrl }) {
-  const [position, setPosition] = useState(0);
-  const itemEls = useRef([]);
+export default function Nav({ setPathId, currentUrl, isMobil }) {
+  const [selected, setSelected] = useState(0);
 
   return (
     <React.Fragment>
       <div className="topBar">
         <div className="line" />
-        <Triangle xPosition={position} />
+
         <div className="navLogo">
-          <Logo />
-          <div className="nav">
-            {routes.map((route) => (
-              <span key={route.id}>
-                {route.id === 0 ? null : <li>|</li>}
-                <li>
-                  <div ref={(ref) => (itemEls.current[route.id] = ref)}>
-                    <ChhLink
-                      routeId={route.id}
-                      routePath={route.path}
+          {isMobil && <Logo />}
+          <nav className="layoutNav">
+            <AnimateSharedLayout>
+              {routes.map((r, i) => (
+                <ul key={`nav-ul-${i}`}>
+                  {i > 0 && isMobil ? <li> | </li> : null}
+                  <li>
+                    <Item
+                      routeId={i}
+                      name={r.name}
+                      path={r.path}
+                      partialy={r.partialy}
                       currentUrl={currentUrl}
                       setPathId={setPathId}
-                      onActive={() => setPosition(itemEls.current[route.id])}
-                    >
-                      {route.name}
-                    </ChhLink>
-                  </div>
-                </li>
-              </span>
-            ))}
-          </div>
+                      isSelected={selected === `route-id-${i}`}
+                      onActive={() => setSelected(`route-id-${i}`)}
+                    />
+                  </li>
+                </ul>
+              ))}
+            </AnimateSharedLayout>
+          </nav>
         </div>
       </div>
     </React.Fragment>
   );
 }
 
-function ChhLink({
-  routeId,
-  routePath,
+function Item({
+  name,
+  isSelected,
+  onActive,
+  path,
   currentUrl,
   setPathId,
-  children,
-  onActive,
+  routeId,
 }) {
   const [active, setActive] = useState(false);
 
-  const updateActive = () => {
-    if (active) {
-      setTimeout(onActive, 300);
-    }
-  };
-
-  useEffect(() => updateActive(), [active]);
+  useEffect(() => active && onActive, [active]);
 
   useEffect(() => {
-    if (routePath !== "/") {
-      if (currentUrl.startsWith(routePath)) {
+    if (path !== "/") {
+      if (currentUrl.startsWith(path)) {
         setActive(true);
-        //console.log(`true ${routePath}`);
+        //console.log(`true ${path}`);
         setTimeout(() => setActive(false), 5);
       }
-    } else if (currentUrl === routePath) {
+    } else if (currentUrl === path) {
       setActive(true);
-      //console.log(`true ${routePath}`);
+      //console.log(`true ${path}`);
       setTimeout(() => setActive(false), 5);
     }
   }, [currentUrl]);
 
-  function handleNavigation(routeId, routePath) {
+  function handleNavigation(routeId, path) {
     setPathId(routeId);
-    setTimeout(() => navigate(routePath), 200);
+    setTimeout(() => navigate(path), 100);
   }
-
   return (
     <div
       className={
-        routePath !== "/"
-          ? currentUrl.startsWith(routePath)
+        path !== "/"
+          ? currentUrl.startsWith(path)
             ? "activeNavButton"
             : "navButton"
-          : currentUrl === routePath
+          : currentUrl === path
           ? "activeNavButton"
           : "navButton"
       }
-      onClick={() => handleNavigation(routeId, routePath, onActive)}
+      onClick={() => handleNavigation(routeId, path)}
     >
-      {children}
+      {isSelected && (
+        <motion.div
+          layoutId="triangle"
+          className="triangle"
+          transition={spring}
+        />
+      )}
+      {name}
     </div>
   );
 }
+
+const spring = {
+  type: "spring",
+  stiffness: 500,
+  damping: 30,
+};

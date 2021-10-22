@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-export function Picker(props) {
+export default function Picker({ filter, onSelect, categories }) {
   const [open, setOpen] = useState(false);
   const [animation, setAnimation] = useState(false);
 
@@ -25,7 +25,7 @@ export function Picker(props) {
             className="triangle"
             animate={{ rotate: animation ? 0 : -90 }}
           />
-          <h2>{props.filter}</h2>
+          <h2>{filter}</h2>
         </div>
 
         <motion.nav
@@ -38,7 +38,10 @@ export function Picker(props) {
             animate={{ opacity: animation ? 1 : 0 }}
             className="picker-ul"
           >
-            {open && props.children}
+            {open &&
+              categories.map((x, i) => (
+                <PickerItem name={x} onSelect={onSelect} filter={filter} />
+              ))}
           </motion.ul>
         </motion.nav>
       </button>
@@ -46,18 +49,18 @@ export function Picker(props) {
   );
 }
 
-export function PickerItem(props) {
+export function PickerItem({ filter, onSelect, name }) {
   return (
     <React.Fragment>
-      {props.name === props.filter ? null : (
+      {name === filter ? null : (
         <li>
           <button
             className="categoryButton"
             onClick={() => {
-              props.onSelect(props.name);
+              onSelect(name);
             }}
           >
-            {props.name}
+            {name}
           </button>
         </li>
       )}

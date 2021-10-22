@@ -16,7 +16,7 @@ const Button = (props) => {
               <motion.div
                 className="block"
                 initial={false}
-                animate={{ width: active ? "400%" : "100%" }}
+                animate={{ width: active ? "300%" : "100%" }}
               />
 
               <motion.span

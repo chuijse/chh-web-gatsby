@@ -2,116 +2,30 @@
 @import "../abstract/fonts";
 @import "../abstract/responsive";
 
-.galleryContainer {
-  margin-top: 2rem;
-  display: grid;
-  width: 100%;
-  grid-template-columns: 50% 50%;
-  .preImage {
-    width: 90%;
-    background-color: transparent;
-    border: transparent;
-    outline: none;
-    object-fit: none;
-    overflow: hidden;
-    .galleryItem {
-      cursor: pointer;
-      display: grid;
-      outline: none;
-      width: 800px;
-    }
-  }
-
-  .itemImage {
-    grid-area: 1 / 1 / 2 / 2;
-    .gatsby-image-wrapper {
-      height: 200px;
-    }
-  }
-
-  .itemSelected {
-    grid-area: 1 / 1 / 2 / 2;
-    height: 200px;
-    width: 100%;
-    display: flex;
-    background-color: hsla(0, 0%, 0%, 0.8);
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
-
-    img {
-      display: flex;
-      width: 40px;
-    }
-  }
-}
-
-.preImage {
-  width: 25%;
-  background-color: transparent;
-  border: transparent;
-  outline: none;
-  object-fit: none;
-  overflow: hidden;
-}
-
-.galleryItem {
-  cursor: pointer;
-  outline: none;
-  width: 1000px;
-}
-
-.overlay {
-  background: white;
-  opacity: 0.2;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
-
-.single-image-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
-}
-
-.single-image-container * {
-  pointer-events: all;
-}
-
-.single-image {
-  border-radius: 20px;
-  width: 1000px;
-}
-
 /*------------------card-------------------*/
 .card-list {
   display: grid;
   width: 100%;
   margin-top: 2rem;
-  grid-template-columns: 50% 50%;
-
-  @include tablet {
-    grid-template-columns: 50% 50%;
-  }
+  grid-template-columns: 48% 48%;
+  column-gap: 4%;
 }
 
 .card {
   position: relative;
   height: 80px;
   max-width: 100%;
-  padding: 5px;
   cursor: pointer;
 
   @include tablet {
+    height: 220px;
+  }
+
+  @include desktop {
+    height: 160px;
+  }
+
+  @include large {
     height: 220px;
   }
 }

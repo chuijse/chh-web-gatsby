@@ -6,8 +6,8 @@ const Logo = () => {
   return (
     <>
       <div className="logo">
-        <img src={logo} alt="Cristian Huijse heise logo" height="40px" />
-        <img src={logoText} alt="Cristian Huijse heise Texto" height="40px" />
+        <img src={logo} alt="Cristian Huijse heise logo" />
+        <img src={logoText} alt="Cristian Huijse heise Texto" />
       </div>
     </>
   );

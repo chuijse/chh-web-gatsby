@@ -1,49 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, graphql } from "gatsby";
-import Card from "../components/Card";
-import { Picker, PickerItem } from "../components/Picker";
+import Card from "../components/CardCopy";
+import Picker from "../components/Picker";
 import { AnimatePresence, motion } from "framer-motion";
 import SlidingAnimation from "../components/SlidingAnimation";
 
 export default function Teaching({ data, right }) {
   const [filter, setCategory] = useState("All");
-
+  const categories = [];
   const courses = data.allSanityCourses.nodes;
+
+  courses.map((x, i) => {
+    categories.push(x.universities.acronym);
+  });
+  let unicCategories = [...new Set(categories)];
+  unicCategories.push("All");
+  console.log(categories);
 
   return (
     <React.Fragment>
       <SlidingAnimation right={right}>
         <div className="mainTeaching">
           <div className="intro">
-            <span className="centerText">
-              <h1>Mi carrera docente</h1>
-              <div className="subHeader">
-                <h2>Filtra por Universidad</h2>
+            <h1>Docencia</h1>
+            <div className="subHeader">
+              <h2>Filtra por Universidad</h2>
 
-                <Picker filter={filter}>
-                  <PickerItem
-                    name={"All"}
-                    onSelect={setCategory}
-                    filter={filter}
-                  />
-                  <PickerItem
-                    name={"UDD"}
-                    onSelect={setCategory}
-                    filter={filter}
-                  />
-                  <PickerItem
-                    name={"UDP"}
-                    onSelect={setCategory}
-                    filter={filter}
-                  />
-                  <PickerItem
-                    name={"UACH"}
-                    onSelect={setCategory}
-                    filter={filter}
-                  />
-                </Picker>
-              </div>
-            </span>
+              <Picker
+                filter={filter}
+                categories={unicCategories}
+                onSelect={setCategory}
+              />
+            </div>
           </div>
 
           {!courses ? (
@@ -67,15 +55,6 @@ export default function Teaching({ data, right }) {
                           transition={{ delay: 1, duration: 2 }}
                         >
                           <Card
-                            color={
-                              filteredCourse.universities.acronym === "UDD"
-                                ? "card_UDD"
-                                : filteredCourse.universities.acronym === "UDP"
-                                ? "card_UDP"
-                                : filteredCourse.universities.acronym === "UACH"
-                                ? "card_UACH"
-                                : null
-                            }
                             title={filteredCourse.title}
                             mainImage={
                               filteredCourse.mainImage.asset.gatsbyImageData

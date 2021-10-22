@@ -1,5 +1,6 @@
 @import "../abstract/color";
 @import "../abstract/fonts";
+@import "../abstract/responsive";
 
 .topBar {
   position: absolute;
@@ -10,33 +11,60 @@
 }
 
 .line {
-  width: 90%;
+  width: 95%;
   margin-top: 20px;
-  margin-left: 5%;
+  margin-left: 2.5%;
   height: 2px;
   background: $colorGray;
+
+  @include tablet {
+    width: 90%;
+    margin-left: 5%;
+  }
 }
 
 .navLogo {
   display: flex;
+  //border: 1px solid red;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: space-between;
-  margin-right: 5%;
-  margin-left: 5%;
+  justify-content: center;
+  margin-right: 2.5%;
+  margin-left: 2.5%;
+
+  @include tablet {
+    justify-content: space-between;
+    margin-right: 5%;
+    margin-left: 5%;
+  }
 }
 
 .logo {
+  display: flex;
   margin-top: 10px;
+
   img {
-    padding-right: 12px;
+    padding-right: 10px;
+    height: 30px;
+
+    @include desktop {
+      padding-right: 12px;
+      height: 40px;
+    }
   }
 }
+
 .layoutNav {
+  width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: flex-end;
   //border: 1px solid red;
+
+  @include tablet {
+    justify-content: flex-end;
+  }
 
   ul {
     //border: 1px solid blue;
@@ -50,33 +78,45 @@
       //border: 1px solid green;
       font-family: "Share Tech Mono", monospace;
       font-size: 1.1rem;
-      margin-left: 10px;
-
       color: $colorGray;
+
+      @include tablet {
+        font-size: 1.45rem;
+        margin-left: 10px;
+      }
     }
   }
 }
 
-.navButton {
+@mixin navButton {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-decoration: none;
   text-transform: uppercase;
   font-family: "Share Tech Mono", monospace;
-  font-size: 1.45rem;
+  font-size: 1.1rem;
   color: $colorBlack;
   cursor: pointer;
+
+  @include tablet {
+    font-size: 1.45rem;
+  }
+}
+
+.navButton {
+  @include navButton;
 }
 
 .activeNavButton {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-family: "Share Tech Mono", monospace;
-  font-size: 1.45rem;
+  @include navButton;
   color: $colorPrimary;
-  cursor: pointer;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 17.5px 12.5px 0 12.5px;
+  border-color: $colorGray transparent transparent transparent;
 }

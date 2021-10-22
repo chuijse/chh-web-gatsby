@@ -1,18 +1,31 @@
 @import "../abstract/color";
 @import "../abstract/fonts";
+@import "../abstract/responsive";
 
 .pickerRoot {
   background-color: transparent;
   border: transparent;
+  margin: 0;
+  padding: 0;
+  width: 130px;
+
+  @include tablet {
+    width: 180px;
+  }
+
   .picker {
     cursor: pointer;
     background-color: $colorPrimary;
-    width: 180px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 20px;
+    margin-left: 0px;
     height: 60px;
+
+    @include tablet {
+      margin-left: 20px;
+    }
 
     h2 {
       color: $colorWhite;
@@ -32,13 +45,17 @@
 
 .picker-nav {
   background-color: $colorPrimary;
-  width: 180px;
+  width: 130px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
   margin-left: 20px;
   z-index: 100;
+
+  @include tablet {
+    width: 180px;
+  }
 
   .picker-ul {
     margin: 0px;

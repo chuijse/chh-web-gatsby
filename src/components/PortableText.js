@@ -1,6 +1,5 @@
 import React from "react";
 import BlockContent from "@sanity/block-content-to-react";
-import { GatsbyImage } from "gatsby-plugin-image";
 
 const serializers = {
   types: {
