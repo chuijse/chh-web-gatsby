@@ -4,6 +4,21 @@ import { GatsbyImage } from "gatsby-plugin-image";
 import Button from "../components/Button";
 import PortableText from "../components/PortableText";
 import ImageGallery from "../components/ImageGallery";
+import { motion } from "framer-motion";
+import BackButton from "../components/BackButton";
+
+const transition = [0.6, 0.01, -0.05, 0.9];
+const duration = 1.4;
+
+const item = {
+  initial: { y: 100, opacity: 0 },
+  animate: {
+    y: 0,
+    opacity: 1,
+
+    transition: { transition, ...transition },
+  },
+};
 
 function HeaderStat({ statClass, statName }) {
   return (
@@ -27,16 +42,36 @@ function ButtonArray({ collectionType, data }) {
   );
 }
 
-const CourseArticle = ({ data }) => {
+const CourseArticle = ({ data, isMobil, isTablet }) => {
   //const { data, errors } = props;
   //const post = data && data.post;
   const course = data?.sanityCourses;
   //console.log(`${course} esto es course`);
+
+  const containers = {
+    initial: { opacity: 0 },
+    animate: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+      },
+    },
+  };
+
   return (
     <React.Fragment>
       <div className="course-root">
         <div className="course-header">
-          <div className="course-header-info">
+          <motion.div
+            className="course-header-info"
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{
+              duration: duration,
+              ease: transition,
+              delay: isTablet ? 0.3 : 0,
+            }}
+          >
             <h1 className="course-header-title">{course.title}</h1>
             <HeaderStat statClass={"Contenidos"} statName={course.abstract} />
             <HeaderStat statClass={"Rol"} statName={"Profesor Adjunto"} />
@@ -48,17 +83,35 @@ const CourseArticle = ({ data }) => {
               statClass={"Año"}
               statName={`${course.year} | ${course.semester}° semestre`}
             />
-          </div>
-          <div className="course-header-image-content">
+          </motion.div>
+          <motion.div
+            className="course-header-image-content"
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{
+              duration: duration,
+              ease: transition,
+              delay: isTablet ? 0 : 0.3,
+            }}
+          >
             <GatsbyImage
               className="header-image"
               image={course.mainImage.asset.gatsbyImageData}
               alt={course.mainImage.caption}
             ></GatsbyImage>
-          </div>
+          </motion.div>
         </div>
         <div className="course-body">
-          <div className="course-body-links">
+          <motion.div
+            className="course-body-links"
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{
+              duration: duration,
+              ease: transition,
+              delay: isTablet ? 0.9 : 0.6,
+            }}
+          >
             <h3>Links de interés</h3>
             <div className="course-body-links-buttons">
               <ButtonArray
@@ -70,12 +123,22 @@ const CourseArticle = ({ data }) => {
                 collectionType={"Tecnicas, herramientas y tecnologías:"}
               />
             </div>
-          </div>
-          <div className="course-body-description">
+            <BackButton text="Volver a Docenia" path="/teaching" />
+          </motion.div>
+          <motion.div
+            className="course-body-description"
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{
+              duration: duration,
+              ease: transition,
+              delay: isTablet ? 0.6 : 0.9,
+            }}
+          >
             <h3>Description del curso</h3>
             <PortableText blocks={course._rawBody}></PortableText>
             <ImageGallery gallery={course.imageGallery}></ImageGallery>
-          </div>
+          </motion.div>
         </div>
       </div>
     </React.Fragment>

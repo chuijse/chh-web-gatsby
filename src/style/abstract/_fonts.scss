@@ -3,52 +3,54 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@700&display=swap");
 
-@import url("https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Share:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700&display=swap");
 @import "./color";
 @import "./responsive";
 
 h1 {
-  font-family: "Titillium Web", sans-serif;
-  font-weight: 700;
+  font-family: "Roboto Mono", monospace;
+  text-transform: uppercase;
+  font-weight: 400;
   font-size: 3rem;
   color: $colorBlack;
   line-height: 2.5rem;
   margin-bottom: 0.5rem;
   @include tablet {
-    font-size: 4.8rem;
-    line-height: 4rem;
-    margin-bottom: 1rem;
+    font-size: 2.7rem;
+    line-height: 1rem;
+    margin-bottom: 0.5rem;
   }
 }
 
 h2 {
-  font-family: "Roboto Mono";
-  font-weight: 500;
+  font-family: "Roboto Mono", monospace;
+  text-transform: uppercase;
+  font-weight: 400;
   font-size: 1.3rem;
-  color: $colorPrimary;
   margin-top: 0.8rem;
   margin-bottom: 0.8rem;
   @include tablet {
-    font-size: 1.5rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 }
 
 h3 {
-  font-family: "Roboto";
-  font-weight: 600;
+  font-family: "Roboto Mono", monospace;
+  font-weight: 400;
+  text-transform: uppercase;
   font-size: 1.5rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
 h4 {
-  font-family: "Roboto Mono";
-  font-weight: 700;
-  font-size: 1.7rem;
+  font-family: "Roboto Mono", monospace;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 1.3rem;
   margin-top: 0px;
   margin-bottom: 0.5rem;
 }
@@ -96,8 +98,9 @@ strong {
 
 @mixin caption {
   margin-top: 10px;
-  font-size: 0.8rem;
-  font-family: "Roboto Mono";
+  font-size: 1rem;
+  font-family: "Share Tech Mono", monospace;
+  text-align: center;
 }
 
 .caption {
@@ -106,6 +109,6 @@ strong {
 
 .white-caption {
   @include caption;
+  font-size: 1.2rem;
   color: white;
-  font-size: 0.9rem;
 }

@@ -1,0 +1,23 @@
+@import "../abstract/fonts";
+@import "../abstract/color";
+@import "../abstract/responsive";
+
+.back-button-root {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 40px;
+
+  .back-button {
+    border: unset;
+    background-color: transparent;
+    font-size: 1.5rem;
+    font-family: "Share Tech Mono", monospace;
+    color: $colorPrimary;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

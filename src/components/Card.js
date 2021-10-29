@@ -1,10 +1,18 @@
 import React, { useState } from "react";
-import flechahorizontal from "../images/flechaHorizontal.svg";
+import flechaHorizontal from "../images/flechaHorizontal.svg";
 import flechaHorizontalB from "../images/flechaHorizontalB.svg";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, AnimateSharedLayout } from "framer-motion";
 import { GatsbyImage } from "gatsby-plugin-image";
 
-const Card = (props) => {
+const Card = ({
+  title,
+  year,
+  semester,
+  mainImage,
+  mainCaption,
+  abstract,
+  id,
+}) => {
   const [active, setactive] = useState(false);
 
   return (
@@ -13,64 +21,65 @@ const Card = (props) => {
         onHoverStart={() => setactive(true)}
         onHoverEnd={() => setactive(false)}
       >
-        <div className={props.color}>
-          <div className="cardTitle">
-            <h3>{props.title}</h3>
-            <span className="subtitle">
-              {props.year} | {props.semester}° smestre
-            </span>
-          </div>
+        <div className="card-root">
+          <motion.div className="image-content">
+            <motion.div
+              className="image-content-animation"
+              animate={{ height: active ? "110%" : "100%" }}
+              transition={{ duration: 0.5 }}
+            >
+              <GatsbyImage
+                image={mainImage}
+                alt={mainCaption}
+                className="card-image"
+              ></GatsbyImage>
+            </motion.div>
+          </motion.div>
+          <motion.div
+            className="info-content"
+            animate={{
+              height: active ? "200px" : "90px",
+              padding: active ? "30px" : "15px",
+              /*marginBottom: active ? "-15px" : "0px",*/
+              marginLeft: active ? "-15px" : "0px",
+              marginRight: active ? "-15px" : "0px",
+            }}
+            transition={{ duration: "0.5" }}
+          >
+            <div className="card-title">
+              <span className="subtitle">
+                {year} | {semester}° semestre
+              </span>
+              <motion.h3
+                animate={{ color: active ? "#ff7f2a" : "white " }}
+                transition={{ duration: "0.5" }}
+              >
+                {title}
+              </motion.h3>
 
-          <div className="cardBackground">
-            <AnimatePresence exitBeforeEnter>
               {active ? (
                 <motion.div
-                  className="cardAbstract"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
+                  transition={{ duration: "1" }}
+                  className="info-open"
                 >
-                  <motion.div
-                    initial={{ y: 50 }}
-                    animate={{ y: 0 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    {props.abstract}
-                  </motion.div>
+                  <p>
+                    UX / UI, Interfaces físicas, Diseño de instrumentos, Diseño
+                    de productos
+                  </p>
+                  <motion.img
+                    initial={{ x: -50, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: "0.5" }}
+                    src={flechaHorizontal}
+                    alt="flecha-teaching-chh.work"
+                    width="45"
+                  />
                 </motion.div>
-              ) : (
-                <GatsbyImage
-                  image={props.mainImage}
-                  alt={props.mainCaption}
-                  className="cardMainImage"
-                ></GatsbyImage>
-              )}
-            </AnimatePresence>
-          </div>
-          <div className="cardCategory">
-            <h4>{props.university}</h4>
-          </div>
-          <AnimatePresence>
-            {active ? (
-              <motion.div
-                className="cardArrow"
-                initial={{ x: -100, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: -10, opacity: 0 }}
-              >
-                <img
-                  src={
-                    props.color !== "whiteCard"
-                      ? flechahorizontal
-                      : flechaHorizontalB
-                  }
-                  alt="flecha-blog-chh.work"
-                  width="65"
-                ></img>
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
+              ) : null}
+            </div>
+          </motion.div>
         </div>
       </motion.div>
     </>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, graphql } from "gatsby";
-import Card from "../components/CardCopy";
+import Card from "../components/Card";
 import Picker from "../components/Picker";
 import { AnimatePresence, motion } from "framer-motion";
 import SlidingAnimation from "../components/SlidingAnimation";
@@ -23,6 +23,7 @@ export default function Teaching({ data, right }) {
         <div className="mainTeaching">
           <div className="intro">
             <h1>Docencia</h1>
+            <div className="teaching-line" />
             <div className="subHeader">
               <h2>Filtra por Universidad</h2>
 
@@ -55,6 +56,7 @@ export default function Teaching({ data, right }) {
                           transition={{ delay: 1, duration: 2 }}
                         >
                           <Card
+                            id={filteredCourse.id}
                             title={filteredCourse.title}
                             mainImage={
                               filteredCourse.mainImage.asset.gatsbyImageData

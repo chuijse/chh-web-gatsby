@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Nav from "./Nav";
-import { AnimatePresence } from "framer-motion";
 
+import { AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 
 const historyPathId = [];
@@ -36,6 +36,8 @@ function Layout(props) {
       <AnimatePresence exitBeforeEnter>
         {React.cloneElement(props.children, {
           right: right,
+          isMobil: isMobil,
+          isTablet: isTabletOrMobile,
         })}
       </AnimatePresence>
     </div>

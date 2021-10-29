@@ -13,18 +13,25 @@
   .intro {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     width: max-content;
-    margin-top: 100px;
+    margin-top: 125px;
 
+    .teaching-line {
+      width: 100%;
+      margin-top: 20px;
+      height: 1px;
+      background: $colorGray;
+    }
     .subHeader {
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
+      align-items: center;
 
-      @include tablet {
-        flex-direction: row;
-        justify-content: flex-start;
+      h2 {
+        text-transform: none;
+        color: $colorGray;
+        font-weight: 300;
       }
     }
   }

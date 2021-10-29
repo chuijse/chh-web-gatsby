@@ -12,7 +12,7 @@ export default function ImageGaller({ gallery }) {
 
   return (
     <>
-      <h4>Galería de imagenes</h4>
+      <h3>Galería de imagenes</h3>
       <AnimateSharedLayout>
         <Gallery items={gallery} setIndex={setIndex} />
         <AnimatePresence>
