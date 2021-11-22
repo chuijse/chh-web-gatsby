@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React /*useState, useEffect */ from "react";
 import Seo from "../components/Seo";
-import { motion, AnimatePresence } from "framer-motion";
+//import { motion, AnimatePresence } from "framer-motion";
 import SlidingAnimation from "../components/SlidingAnimation";
 
 export default function Projects({ right }) {

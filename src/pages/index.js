@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Seo from "../components/Seo";
-import "../style/index.scss";
+
 import Arrow from "../components/about/Arrow";
 import Hola from "../components/about/Hola";
 import IntroText from "../components/about/IntroText";

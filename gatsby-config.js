@@ -34,6 +34,13 @@ module.exports = {
     ],
   },
   plugins: [
+    `gatsby-plugin-smoothscroll`,
+    {
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: require.resolve(`./src/components/Layout.js`),
+      },
+    },
     {
       resolve: "gatsby-source-sanity",
       options: {

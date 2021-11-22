@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import flechaHorizontal from "../images/flechaHorizontal.svg";
-import flechaHorizontalB from "../images/flechaHorizontalB.svg";
-import { AnimatePresence, motion, AnimateSharedLayout } from "framer-motion";
+//import flechaHorizontalB from "../images/flechaHorizontalB.svg";
+import { motion } from "framer-motion";
 import { GatsbyImage } from "gatsby-plugin-image";
 
 const Card = ({
@@ -51,7 +51,7 @@ const Card = ({
                 {year} | {semester}° semestre
               </span>
               <motion.h3
-                animate={{ color: active ? "#ff7f2a" : "white " }}
+                animate={{ color: active ? "#ff7f2a" : "#ffffff" }}
                 transition={{ duration: "0.5" }}
               >
                 {title}

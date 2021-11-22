@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
-import { navigate } from "gatsby";
+import React, { useEffect, useState } from "react";
+import { Link } from "gatsby";
 import Logo from "./Logo";
 import { motion, AnimateSharedLayout } from "framer-motion";
 
@@ -11,86 +11,88 @@ const routes = [
   { name: "contact", path: "/contact", partialy: false },
 ];
 
-export default function Nav({ setPathId, currentUrl, isMobil }) {
+export default function Nav({ isMobil, location }) {
   const [selected, setSelected] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
-    <React.Fragment>
-      <div className="topBar">
-        <div className="line" />
+    mounted && (
+      <React.Fragment>
+        <div className="topBar">
+          <div className="line" />
 
-        <div className="navLogo">
-          {isMobil && <Logo />}
-          <nav className="layoutNav">
-            <AnimateSharedLayout>
-              {routes.map((r, i) => (
-                <ul key={`nav-ul-${i}`}>
-                  {i > 0 && isMobil ? <li> | </li> : null}
-                  <li>
-                    <Item
-                      routeId={i}
-                      name={r.name}
-                      path={r.path}
-                      partialy={r.partialy}
-                      currentUrl={currentUrl}
-                      setPathId={setPathId}
-                      isSelected={selected === `route-id-${i}`}
-                      onActive={() => setSelected(`route-id-${i}`)}
-                    />
-                  </li>
-                </ul>
-              ))}
-            </AnimateSharedLayout>
-          </nav>
+          <div className="navLogo">
+            {isMobil && <Logo />}
+            <nav className="layoutNav">
+              <AnimateSharedLayout>
+                {routes.map((r, i) => (
+                  <ul key={`nav-ul-${i}`}>
+                    {i > 0 && isMobil ? <li> | </li> : null}
+                    <li>
+                      <ChhLink
+                        routeId={i}
+                        name={r.name}
+                        path={r.path}
+                        partialy={r.partialy}
+                        location={location}
+                        isSelected={selected === `route-id-${i}`}
+                        setSelected={setSelected}
+                      />
+                    </li>
+                  </ul>
+                ))}
+              </AnimateSharedLayout>
+            </nav>
+          </div>
         </div>
-      </div>
-    </React.Fragment>
+      </React.Fragment>
+    )
   );
 }
 
-function Item({
+function ChhLink({
   name,
-  isSelected,
-  onActive,
   path,
-  currentUrl,
-  setPathId,
+  partialy,
+  isSelected,
   routeId,
+  setSelected,
+  location,
 }) {
-  const [active, setActive] = useState(false);
+  const spring = {
+    type: "spring",
+    stiffness: 500,
+    damping: 30,
+  };
 
-  useEffect(() => active && onActive, [active]);
+  const [active, setActive] = useState();
+
+  useEffect(() => active && setSelected(`route-id-${routeId}`), [active]);
 
   useEffect(() => {
     if (path !== "/") {
-      if (currentUrl.startsWith(path)) {
+      if (location.startsWith(path)) {
         setActive(true);
         //console.log(`true ${path}`);
         setTimeout(() => setActive(false), 5);
       }
-    } else if (currentUrl === path) {
+    } else if (location === path) {
       setActive(true);
       //console.log(`true ${path}`);
       setTimeout(() => setActive(false), 5);
     }
-  }, [currentUrl]);
+  }, [location]);
 
-  function handleNavigation(routeId, path) {
-    setPathId(routeId);
-    setTimeout(() => navigate(path), 100);
-  }
   return (
-    <div
-      className={
-        path !== "/"
-          ? currentUrl.startsWith(path)
-            ? "activeNavButton"
-            : "navButton"
-          : currentUrl === path
-          ? "activeNavButton"
-          : "navButton"
-      }
-      onClick={() => handleNavigation(routeId, path)}
+    <Link
+      to={path}
+      className="navButton"
+      partiallyActive={partialy}
+      activeClassName="activeNavButton"
     >
       {isSelected && (
         <motion.div
@@ -100,12 +102,6 @@ function Item({
         />
       )}
       {name}
-    </div>
+    </Link>
   );
 }
-
-const spring = {
-  type: "spring",
-  stiffness: 500,
-  damping: 30,
-};

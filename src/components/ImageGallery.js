@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Seo from "./Seo";
+//import Seo from "./Seo";
 import { GatsbyImage } from "gatsby-plugin-image";
-import ArrowBack from "../images/arrowBack.svg";
-import ArrowForward from "../images/arrowForward.svg";
-import Close from "../images/close.svg";
+//import ArrowBack from "../images/arrowBack.svg";
+//import ArrowForward from "../images/arrowForward.svg";
+//import Close from "../images/close.svg";
 import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import GallerItem from "./GalleryItem";
 
@@ -19,7 +19,7 @@ export default function ImageGaller({ gallery }) {
           {index !== false && (
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.8 }}
+              animate={{ opacity: 0.2 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
               key="overlay"
@@ -60,7 +60,7 @@ function Gallery({ items, setIndex }) {
 
 function SingleImage({ image, index, onClick }) {
   return (
-    <div className="card-content-container open" onClick={onClick}>
+    <button className="card-content-container open" onClick={onClick}>
       <motion.div className="card-content" layoutId={`card-container-${index}`}>
         <motion.div
           className="card-image-container"
@@ -74,6 +74,6 @@ function SingleImage({ image, index, onClick }) {
         </motion.div>
         <p className="white-caption"> Descripción: {image.caption}</p>
       </motion.div>
-    </div>
+    </button>
   );
 }

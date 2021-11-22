@@ -1,0 +1,22 @@
+@import "../abstract/color";
+@import "../abstract/fonts";
+@import "../abstract/responsive";
+
+.share-buttons-root {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+
+  @include tablet {
+    margin-right: 80px;
+  }
+
+  .share-buttons {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    //border: 1px solid red;
+  }
+}

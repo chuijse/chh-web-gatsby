@@ -7,28 +7,47 @@
 @import "../component/blockImage";
 @import "../abstract/responsive";
 @import "../component/back-button";
+@import "../component/share-buttons";
 
-.course-root {
-  max-width: 1300px;
+.course-root-header {
   margin: auto;
-  margin-top: 100px;
+  height: 100vh;
+  width: 100%;
+  //border: 1px solid rgb(243, 5, 255);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 
-  @include desktop {
-    margin-top: 200px;
+  @include tablet {
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
   }
 }
 
 .course-header {
+  //border: 1px solid blue;
   display: flex;
   flex-direction: column-reverse;
-  padding-left: 20px;
-  padding-right: 20px;
+  height: 95vh;
+
+  @include tablet {
+    padding-top: 80px;
+    width: auto;
+    height: 75vh;
+  }
 
   @include desktop {
+    padding-top: 100px;
+    max-width: 1300px;
     flex-direction: row;
+    height: 65vh;
   }
 
   @include large {
+    height: 60vh;
     padding-left: 0px;
     padding-right: 0px;
   }
@@ -39,10 +58,21 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-right: 80px;
-  width: 100%;
+  padding-left: 3%;
+  padding-right: 3%;
+
+  @include tablet {
+    padding-left: 0%;
+    padding-right: 0%;
+  }
 
   @include desktop {
+    width: 300px;
+    margin-right: 80px;
+  }
+
+  @include large {
+    margin-right: 100px;
     width: 400px;
   }
 
@@ -54,25 +84,35 @@
     line-height: 100%;
     //font-family: "Titillium Web", sans-serif;
     //text-transform: none;
+    margin-bottom: 10px;
 
     @include desktop {
-      margin-top: -0.3rem;
+      margin-top: -1rem;
+      margin-bottom: 50px;
     }
   }
-  .course-header-stat {
-    .course-header-stat-class {
-      font-family: "Share Tech Mono", monospace;
-      color: $colorPrimary;
-      font-size: 1rem;
-      margin-bottom: 0px;
-    }
-    .course-header-stat-info {
-      font-family: "Roboto Mono", monospace;
-      color: $colorBlack;
-      font-size: 1rem;
-      font-weight: 400;
-      margin-bottom: 0px;
-      word-wrap: break-word;
+
+  .course-header-animation-stat {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+
+    .course-header-stat {
+      .course-header-stat-class {
+        font-family: "Share Tech Mono", monospace;
+        color: $colorPrimary;
+        font-size: 1rem;
+        margin-bottom: 0px;
+      }
+      .course-header-stat-info {
+        font-family: "Roboto Mono", monospace;
+        color: $colorBlack;
+        font-size: 1rem;
+        font-weight: 400;
+        margin-bottom: 0px;
+        word-wrap: break-word;
+      }
     }
   }
 }
@@ -82,14 +122,14 @@
   align-items: center;
   overflow: hidden;
   width: 100%;
-  height: 300px;
+  height: 100%;
 
   @include tablet {
-    height: 360px;
+    height: 100%;
   }
 
   @include desktop {
-    height: 450px;
+    height: 100%;
   }
 
   .header-image {
@@ -97,17 +137,30 @@
   }
 }
 
+.course-root-body {
+  //border: 1px solid red;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 .course-body {
+  //border: 1px solid blue;
   display: flex;
   flex-direction: column-reverse;
-  margin-top: 30px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 3%;
+  padding-right: 3%;
   margin-bottom: 50px;
 
+  @include tablet {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
   @include desktop {
+    max-width: 1300px;
     flex-direction: row;
-    margin-top: 100px;
 
     @include large {
       padding-left: 0px;
@@ -125,6 +178,27 @@
       position: -webkit-sticky;
       top: 50px;
     }
+    .course-body-links-aniamtion {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      //border: 1px solid blue;
+
+      @include tablet {
+        margin-right: 80px;
+      }
+
+      @include desktop {
+        width: 300px !important;
+        margin-right: 80px;
+      }
+
+      @include large {
+        margin-right: 100px;
+        width: 400px !important;
+      }
+    }
+
     h3 {
       margin-bottom: 0px;
       font-size: 1.6rem;
@@ -136,15 +210,15 @@
       flex-shrink: 0;
 
       @include tablet {
+        width: 100%;
+        //border: 1px solid red;
         flex-direction: row;
         justify-content: space-between;
       }
 
       @include desktop {
         flex-direction: column;
-        width: 400px;
         padding-right: 0px;
-        margin-right: 80px;
       }
     }
   }
@@ -154,6 +228,10 @@
       margin-bottom: 15px;
       font-size: 1.6rem;
       font-weight: 400;
+    }
+    .course-body-description-animation {
+      display: flex;
+      flex-direction: column;
     }
   }
 }
