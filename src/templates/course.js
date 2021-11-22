@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { graphql } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
-import Button from "../components/Button";
+
 import PortableText from "../components/PortableText";
 import ImageGallery from "../components/ImageGallery";
-import { useAnimation, motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import BackButton from "../components/BackButton";
-import ShareButtons from "../components/Share";
-import SmoothScroll from "../components/SmoothScroll";
+import { motion } from "framer-motion";
+import CourseBodyLinks from "../components/TemplateBodyLinks";
+import CourseBodyDescription from "../components/TemplateBodyDescription";
 
 //const transition = [0.6, 0.01, -0.05, 0.9];
 //dconst duration = 1.4;
@@ -18,19 +16,6 @@ function HeaderStat({ statClass, statName }) {
     <div className="course-header-stat">
       <p className="course-header-stat-class">{statClass}</p>
       <p className="course-header-stat-info">{statName}</p>
-    </div>
-  );
-}
-
-function ButtonArray({ collectionType, data }) {
-  return (
-    <div className="button-collection">
-      <p>{collectionType}</p>
-      {data.map((data, index) => (
-        <span key={index}>
-          <Button name={data.name} link={data.link}></Button>
-        </span>
-      ))}
     </div>
   );
 }
@@ -138,86 +123,19 @@ const CourseArticle = ({ data, isMobil, isTablet, location }) => {
               tecnologies={course.tecnologies}
               title={course.title}
               location={location.href}
+              backButton="Docencia"
             />
-            <div className="course-body-description">
-              <motion.h3
-                initial={{ clipPath: "inset(0% 0% 100% 0%)", y: "100%" }}
-                animate={{ clipPath: "inset(0% 0% 0% 0%)", y: "0" }}
-                transition={{
-                  duration: 0.5,
-                  delay: isTablet ? 2 : 1,
-                }}
-              >
-                Description del curso
-              </motion.h3>
-              <motion.span
-                className="course-body-description-animation"
-                initial={{ clipPath: "inset(0% 100% 0% 0%)", y: "0" }}
-                animate={{ clipPath: "inset(0% 0% 0% 0%)", y: "0" }}
-                transition={{
-                  duration: 1,
-                  delay: isTablet ? 2 : 1,
-                }}
-              >
-                <PortableText blocks={course._rawBody}></PortableText>
-                <ImageGallery gallery={course.imageGallery}></ImageGallery>
-              </motion.span>
-            </div>
+            <CourseBodyDescription
+              portableText={course._rawBody}
+              imageGallery={course.imageGallery}
+              descriptionTitle={"curso"}
+            />
           </div>
         </div>
       </motion.div>
     </React.Fragment>
   );
 };
-
-function CourseBodyLinks({ colleagues, tecnologies, title, location }) {
-  const [ref, inView] = useInView();
-  const [inScreen, setInScreen] = useState(false);
-  useEffect(() => {
-    if (inView) {
-      console.log(`inView: ${inView}`);
-      setInScreen(true);
-    }
-  }, [inView]);
-  return (
-    <div className="course-body-links" ref={ref} style={{ marginTop: "10px" }}>
-      <motion.h3
-        initial={{ clipPath: "inset(0% 0% 100% 0%)", y: "100%" }}
-        animate={inScreen && { clipPath: "inset(0% 0% 0% 0%)", y: "0" }}
-        transition={{
-          duration: 0.5,
-          delay: 0.5,
-        }}
-      >
-        Links de interés
-      </motion.h3>
-      <motion.span
-        className="course-body-links-aniamtion"
-        initial={{ clipPath: "inset(100% 0% 0% 0%)", y: "-100%" }}
-        animate={inScreen && { clipPath: "inset(0% 0% 0% 0%)", y: "0" }}
-        transition={{ duration: 1.5, delay: 1 }}
-      >
-        <div className="course-body-links-buttons">
-          <ButtonArray
-            data={colleagues}
-            collectionType={"Colegas, compañeros y Colaboradores:"}
-          />
-          <ButtonArray
-            data={tecnologies}
-            collectionType={"Tecnicas, herramientas y tecnologías:"}
-          />
-        </div>
-        <BackButton text="Volver a Docenia" path="/teaching" />
-        <ShareButtons
-          title={`${title} | CHH Portafolio`}
-          url={location}
-          twitterHandle={"CHH_Portafolio"}
-          tags={["CHH"]}
-        />
-      </motion.span>
-    </div>
-  );
-}
 
 export default CourseArticle;
 

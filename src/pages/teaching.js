@@ -25,7 +25,6 @@ export default function Teaching({ data, right }) {
       opacity: 1,
       transition: {
         delayChildren: 1,
-        staggerChildren: 0.3,
       },
     },
   };
