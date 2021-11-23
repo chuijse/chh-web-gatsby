@@ -21,9 +21,9 @@ const serializers = {
           width="100%"
           height="500px"
           src={props.node.videoUrl}
-          frameborder="0"
+          frameBorder="0"
           allow="autoplay; encrypted-media"
-          allowfullscreen=""
+          allowFullScreen=""
         ></iframe>
         <p className="caption">{props.node.caption}</p>
       </div>

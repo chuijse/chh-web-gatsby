@@ -29,7 +29,7 @@ export default function TemplateBodyLinks({
   const [inScreen, setInScreen] = useState(false);
   useEffect(() => {
     if (inView) {
-      console.log(`inView: ${inView}`);
+      //console.log(`inView: ${inView}`);
       setInScreen(true);
     }
   }, [inView]);

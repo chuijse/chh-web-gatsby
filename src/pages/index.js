@@ -10,33 +10,31 @@ import SlidingAnimation from "../components/SlidingAnimation";
 export default function Home({ right }) {
   return (
     <React.Fragment>
-      <SlidingAnimation right={right}>
-        <Seo />
-        <div className="workIntro">
-          <div className="layout">
-            <Hola />
-            <IntroText />
+      <Seo />
+      <div className="workIntro">
+        <div className="layout">
+          <Hola />
+          <IntroText />
+          <motion.div
+            className="arrowBotom"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 7, duration: 1 }}
+          >
             <motion.div
-              className="arrowBotom"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 7, duration: 1 }}
+              initial={{ y: 50 }}
+              animate={{ y: 0 }}
+              transition={{
+                duration: 1,
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
             >
-              <motion.div
-                initial={{ y: 50 }}
-                animate={{ y: 0 }}
-                transition={{
-                  duration: 1,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                }}
-              >
-                <Arrow />
-              </motion.div>
+              <Arrow />
             </motion.div>
-          </div>
+          </motion.div>
         </div>
-      </SlidingAnimation>
+      </div>
     </React.Fragment>
   );
 }

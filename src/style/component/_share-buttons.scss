@@ -3,13 +3,10 @@
 @import "../abstract/responsive";
 
 .share-buttons-root {
+  width: 100%;
   margin-top: 50px;
   display: flex;
   flex-direction: column;
-
-  @include tablet {
-    margin-right: 80px;
-  }
 
   .share-buttons {
     margin-top: 5px;
@@ -18,5 +15,12 @@
     justify-content: space-between;
     align-items: center;
     //border: 1px solid red;
+
+    @include tablet {
+      width: 45%;
+    }
+    @include desktop {
+      width: 100%;
+    }
   }
 }

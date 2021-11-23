@@ -13,7 +13,7 @@ export default function TemplateBodyDescription({
   const [inScreen, setInScreen] = useState(false);
   useEffect(() => {
     if (inView) {
-      console.log(`inView: ${inView}`);
+      //console.log(`inView: ${inView}`);
       setInScreen(true);
     }
   }, [inView]);
@@ -27,7 +27,7 @@ export default function TemplateBodyDescription({
           delay: 1,
         }}
       >
-        Description del {descriptionTitle}
+        {descriptionTitle}
       </motion.h3>
       <motion.span
         className="course-body-description-animation"

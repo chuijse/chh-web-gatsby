@@ -14,6 +14,8 @@ import {
   EmailIcon,
   TelegramShareButton,
   TelegramIcon,
+  InstapaperShareButton,
+  InstapaperIcon,
 } from "react-share";
 
 export default function ShareButtons({ title, url, twitterHandle, tags }) {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 //import Seo from "./Seo";
 import { GatsbyImage } from "gatsby-plugin-image";
 //import ArrowBack from "../images/arrowBack.svg";
@@ -6,20 +6,39 @@ import { GatsbyImage } from "gatsby-plugin-image";
 //import Close from "../images/close.svg";
 import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import GallerItem from "./GalleryItem";
+import { useInView } from "react-intersection-observer";
 
 export default function ImageGaller({ gallery }) {
   const [index, setIndex] = useState(false);
 
+  const [ref, inView] = useInView();
+  const [inScreen, setInScreen] = useState(false);
+  useEffect(() => {
+    if (inView) {
+      //console.log(`inView: ${inView}`);
+      setInScreen(true);
+    }
+  }, [inView]);
+
   return (
-    <>
-      <h3>Galería de imagenes</h3>
+    <div ref={ref}>
+      <motion.h3
+        initial={{ clipPath: "inset(0% 0% 100% 0%)", y: "100%" }}
+        animate={inScreen && { clipPath: "inset(0% 0% 0% 0%)", y: "0" }}
+        transition={{
+          duration: 0.5,
+          delay: 1,
+        }}
+      >
+        Galería de imagenes
+      </motion.h3>
       <AnimateSharedLayout>
-        <Gallery items={gallery} setIndex={setIndex} />
+        <Gallery items={gallery} setIndex={setIndex} inView={inView} />
         <AnimatePresence>
           {index !== false && (
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.2 }}
+              animate={{ opacity: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
               key="overlay"
@@ -39,13 +58,24 @@ export default function ImageGaller({ gallery }) {
           )}
         </AnimatePresence>
       </AnimateSharedLayout>
-    </>
+    </div>
   );
 }
 
 function Gallery({ items, setIndex }) {
+  const item = {
+    initial: {
+      clipPath: "inset(100% 0% 0% 0%)",
+      y: "-100%",
+    },
+    animate: {
+      clipPath: "inset(0% 0% 0% 0%)",
+      y: "0",
+      transition: { duration: 1 },
+    },
+  };
   return (
-    <div className="card-list">
+    <motion.div className="card-list">
       {items?.map((image, i) => (
         <GallerItem
           key={`card-list-${i}`}
@@ -54,7 +84,7 @@ function Gallery({ items, setIndex }) {
           setIndex={setIndex}
         />
       ))}
-    </div>
+    </motion.div>
   );
 }
 
