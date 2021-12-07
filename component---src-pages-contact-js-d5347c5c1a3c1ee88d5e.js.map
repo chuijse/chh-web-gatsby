@@ -1,0 +1,1 @@
+{"version":3,"file":"component---src-pages-contact-js-d5347c5c1a3c1ee88d5e.js","mappings":"+KAEe,SAASA,IACtB,OACE,gCACE","sources":["webpack://chh-web-gatsby/./src/pages/contact.js"],"sourcesContent":["import React from \"react\";\n\nexport default function Contact() {\n  return (\n    <>\n      <div>Contact me!</div>\n    </>\n  );\n}\n"],"names":["Contact"],"sourceRoot":""}
