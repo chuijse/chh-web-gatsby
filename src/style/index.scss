@@ -5,10 +5,12 @@
 @import "./sections/teaching";
 @import "./component/modal";
 @import "./abstract/fonts";
+@import "./component/single-image";
 
 body {
   margin: 0px;
   overflow: auto;
+  scroll-behavior: smooth;
 }
 
 a {

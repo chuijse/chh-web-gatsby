@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { Link, graphql } from "gatsby";
+import React, { useState, useEffect } from "react";
+import { Link, graphql, navigate } from "gatsby";
 import Card from "../components/Card";
 import Picker from "../components/Picker";
 import { AnimatePresence, motion } from "framer-motion";
-import SmoothScroll from "../components/SmoothScroll";
+import { scroller } from "react-scroll";
+import Seo from "../components/Seo";
+
 //import SlidingAnimation from "../components/SlidingAnimation";
 
-export default function Teaching({ data, right }) {
+export default function Teaching({ data, location }) {
   const [filter, setCategory] = useState("All");
 
   const categories = [];
@@ -17,6 +19,13 @@ export default function Teaching({ data, right }) {
   });
   let unicCategories = [...new Set(categories)];
   unicCategories.push("All");
+
+  useEffect(() => {
+    if (location.state?.lastId) {
+      scrollTo(location.state.lastId);
+      console.log(location.state.lastId);
+    }
+  }, []);
 
   const container = {
     initial: { opacity: 0 },
@@ -42,8 +51,17 @@ export default function Teaching({ data, right }) {
     },
   };
 
+  function scrollTo(id) {
+    scroller.scrollTo(id, {
+      duration: 2000,
+      delay: 0,
+      smooth: "easeInOutCubic",
+    });
+  }
+
   return (
     <React.Fragment>
+      <Seo title="Teaching" />
       <motion.div className="mainTeaching" exit={{ opacity: 0 }}>
         <div className="intro">
           <motion.h1
@@ -94,7 +112,8 @@ export default function Teaching({ data, right }) {
                 )
                 .map((filteredCourse) => (
                   <motion.span
-                    key={`card-course-${filteredCourse.id}`}
+                    key={`card-course${filteredCourse.id}`}
+                    id={`card-course${filteredCourse.id}`}
                     variants={item}
                   >
                     <Link to={`/teaching/${filteredCourse.slug.current}`}>

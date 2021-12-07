@@ -8,20 +8,16 @@ export default function TemplateBodyDescription({
   portableText,
   imageGallery,
   descriptionTitle,
+  slug,
+  location,
+  id,
 }) {
-  const [ref, inView] = useInView();
-  const [inScreen, setInScreen] = useState(false);
-  useEffect(() => {
-    if (inView) {
-      //console.log(`inView: ${inView}`);
-      setInScreen(true);
-    }
-  }, [inView]);
   return (
-    <div className="course-body-description" ref={ref}>
+    <div className="course-body-description">
       <motion.h3
         initial={{ clipPath: "inset(0% 0% 100% 0%)", y: "100%" }}
-        animate={inScreen && { clipPath: "inset(0% 0% 0% 0%)", y: "0" }}
+        whileInView={{ clipPath: "inset(0% 0% 0% 0%)", y: "0" }}
+        viewport={{ once: true }}
         transition={{
           duration: 0.5,
           delay: 1,
@@ -32,7 +28,8 @@ export default function TemplateBodyDescription({
       <motion.span
         className="course-body-description-animation"
         initial={{ clipPath: "inset(0% 100% 0% 0%)", y: "0" }}
-        animate={inScreen && { clipPath: "inset(0% 0% 0% 0%)", y: "0" }}
+        whileInView={{ clipPath: "inset(0% 0% 0% 0%)", y: "0" }}
+        viewport={{ once: true }}
         transition={{
           duration: 1.25,
           delay: 0.5,
@@ -40,7 +37,13 @@ export default function TemplateBodyDescription({
       >
         <PortableText blocks={portableText}></PortableText>
       </motion.span>
-      <ImageGallery gallery={imageGallery}></ImageGallery>
+
+      <ImageGallery
+        id={id}
+        gallery={imageGallery}
+        slug={slug}
+        location={location}
+      ></ImageGallery>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import HeaderStat from "./HeaderStat";
 
 export default function TemplateHeaderInfo({
   isTablet,
@@ -61,14 +62,5 @@ export default function TemplateHeaderInfo({
         />
       </motion.span>
     </motion.div>
-  );
-}
-
-function HeaderStat({ statClass, statName }) {
-  return (
-    <div className="course-header-stat">
-      <p className="course-header-stat-class">{statClass}</p>
-      <p className="course-header-stat-info">{statName}</p>
-    </div>
   );
 }
