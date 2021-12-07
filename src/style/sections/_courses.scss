@@ -8,6 +8,7 @@
 @import "../abstract/responsive";
 @import "../component/back-button";
 @import "../component/share-buttons";
+@import "../component/header-stat";
 
 .course-root-header {
   margin: auto;
@@ -97,23 +98,6 @@
     flex-direction: column;
     justify-content: space-between;
     flex: 1;
-
-    .course-header-stat {
-      .course-header-stat-class {
-        font-family: "Share Tech Mono", monospace;
-        color: $colorPrimary;
-        font-size: 1rem;
-        margin-bottom: 0px;
-      }
-      .course-header-stat-info {
-        font-family: "Roboto Mono", monospace;
-        color: $colorBlack;
-        font-size: 1rem;
-        font-weight: 400;
-        margin-bottom: 0px;
-        word-wrap: break-word;
-      }
-    }
   }
 }
 

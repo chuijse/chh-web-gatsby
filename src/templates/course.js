@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
-
 import DocumentTemplate from "../components/DocumentTemplate";
+import Seo from "../components/Seo";
 
 //const transition = [0.6, 0.01, -0.05, 0.9];
 //dconst duration = 1.4;
@@ -14,6 +14,11 @@ const CourseArticle = ({ data, isMobil, isTablet, location }) => {
 
   return (
     <React.Fragment>
+      <Seo
+        title={course.title}
+        description={course.abstract}
+        image={course.mainImage.asset.url}
+      />
       <DocumentTemplate
         documentType="course"
         isTablet={isTablet}
@@ -26,9 +31,11 @@ const CourseArticle = ({ data, isMobil, isTablet, location }) => {
         colleagues={course.colleagues}
         tecnologies={course.tecnologies}
         title={course.title}
-        location={location.href}
+        location={location}
         portableText={course._rawBody}
         imageGallery={course.imageGallery}
+        slug={course.slug.current}
+        id={course.id}
       />
     </React.Fragment>
   );
@@ -57,23 +64,26 @@ export const query = graphql`
         link
       }
       slug {
-        _key
-        _type
         current
       }
       mainImage {
         caption
         asset {
           gatsbyImageData(fit: FILLMAX, placeholder: BLURRED)
+          url
         }
       }
       imageGallery {
-        asset {
-          thumb: gatsbyImageData(placeholder: BLURRED)
-          high: gatsbyImageData(fit: SCALE, placeholder: BLURRED)
-          url
+        photo {
+          asset {
+            gatsbyImageData(fit: FILLMAX, placeholder: BLURRED)
+            url
+          }
         }
         caption
+        slug {
+          current
+        }
       }
     }
   }

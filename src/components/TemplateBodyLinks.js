@@ -24,15 +24,18 @@ export default function TemplateBodyLinks({
   title,
   location,
   backButton,
+  id,
 }) {
   const [ref, inView] = useInView();
   const [inScreen, setInScreen] = useState(false);
+
   useEffect(() => {
     if (inView) {
       //console.log(`inView: ${inView}`);
       setInScreen(true);
     }
   }, [inView]);
+
   return (
     <div className="course-body-links" ref={ref}>
       <motion.h3
@@ -61,10 +64,14 @@ export default function TemplateBodyLinks({
             collectionType={"Tecnicas, herramientas y tecnologías:"}
           />
         </div>
-        <BackButton text={`Volver a ${backButton}`} path="/teaching" />
+        <BackButton
+          text={`Volver a ${backButton}`}
+          path="/teaching"
+          id={`card-course${id}`}
+        />
         <ShareButtons
           title={`${title} | CHH Portafolio`}
-          url={location}
+          url={location.href}
           twitterHandle={"CHH_Portafolio"}
           tags={["CHH"]}
         />

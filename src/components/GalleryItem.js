@@ -2,31 +2,41 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { GatsbyImage } from "gatsby-plugin-image";
 import GoArrow from "../images/goArrow.svg";
-import { useInView } from "react-intersection-observer";
 
-const ImageGallerItem = ({ setIndex, i, image }) => {
+import { navigate } from "gatsby";
+import { scroller } from "react-scroll";
+
+const ImageGallerItem = ({ i, image, slug, location, id }) => {
   const [ItemSelected, setItemSelected] = useState(false);
-  const [ref, inView] = useInView();
-  const [inScreen, setInScreen] = useState(false);
+
   useEffect(() => {
-    if (inView) {
-      //console.log(`inView: ${inView}`);
-      setInScreen(true);
+    if (location.state?.lastId) {
+      scrollTo(`${location.state.lastId}`);
+      console.log(location.state.lastId);
     }
-  }, [inView]);
+  }, []);
+
+  function scrollTo(id) {
+    scroller.scrollTo(id, {
+      duration: 2000,
+      delay: 0,
+      smooth: "easeInOutCubic",
+    });
+  }
 
   return (
     <motion.div
-      ref={ref}
+      id={`gallery-item${id}-${i}`}
       className="card"
-      onClick={() => setIndex(i)}
+      onClick={() => navigate(`/teaching/${slug}/${i}/${image.slug.current}`)}
       onHoverStart={() => setItemSelected(true)}
       onHoverEnd={() => setItemSelected(false)}
     >
       <motion.div
         className="card-content-container"
         initial={{ clipPath: "inset(0% 0% 0% 100%)", x: "-100%" }}
-        animate={inScreen && { clipPath: "inset(0% 0% 0% 0%)", x: "0" }}
+        whileInView={{ clipPath: "inset(0% 0% 0% 0%)", x: "0" }}
+        viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.3 }}
       >
         <motion.div className="card-content" layoutId={`card-container-${i}`}>
@@ -35,8 +45,9 @@ const ImageGallerItem = ({ setIndex, i, image }) => {
             layoutId={`card-image-container-${i}`}
           >
             <GatsbyImage
-              image={image.asset.thumb}
+              image={image.photo.asset.gatsbyImageData}
               className="card-image"
+              objectFit="cover"
             ></GatsbyImage>
           </motion.div>
         </motion.div>

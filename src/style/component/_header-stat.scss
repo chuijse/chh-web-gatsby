@@ -1,0 +1,20 @@
+@import "../abstract/color";
+@import "../abstract/fonts";
+@import "../abstract/responsive";
+
+.header-stat {
+  .header-stat-class {
+    font-family: "Share Tech Mono", monospace;
+    color: $colorPrimary;
+    font-size: 1rem;
+    margin-bottom: 0px;
+  }
+  .header-stat-info {
+    font-family: "Roboto Mono", monospace;
+    color: $colorBlack;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 0px;
+    word-wrap: break-word;
+  }
+}

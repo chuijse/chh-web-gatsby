@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
-//import Seo from "./Seo";
-import { GatsbyImage } from "gatsby-plugin-image";
-//import ArrowBack from "../images/arrowBack.svg";
-//import ArrowForward from "../images/arrowForward.svg";
 //import Close from "../images/close.svg";
 import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import GallerItem from "./GalleryItem";
 import { useInView } from "react-intersection-observer";
 
-export default function ImageGaller({ gallery }) {
+export default function ImageGallery({ gallery, slug, location, id }) {
   const [index, setIndex] = useState(false);
 
   const [ref, inView] = useInView();
@@ -21,10 +17,11 @@ export default function ImageGaller({ gallery }) {
   }, [inView]);
 
   return (
-    <div ref={ref}>
+    <div>
       <motion.h3
         initial={{ clipPath: "inset(0% 0% 100% 0%)", y: "100%" }}
-        animate={inScreen && { clipPath: "inset(0% 0% 0% 0%)", y: "0" }}
+        whileInView={{ clipPath: "inset(0% 0% 0% 0%)", y: "0" }}
+        viewport={{ once: true, amount: 0.8 }}
         transition={{
           duration: 0.5,
           delay: 1,
@@ -33,36 +30,13 @@ export default function ImageGaller({ gallery }) {
         Galería de imagenes
       </motion.h3>
       <AnimateSharedLayout>
-        <Gallery items={gallery} setIndex={setIndex} inView={inView} />
-        <AnimatePresence>
-          {index !== false && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              key="overlay"
-              className="overlay"
-              onClick={() => setIndex(false)}
-            />
-          )}
-
-          {index !== false && (
-            <SingleImage
-              key="image"
-              index={index}
-              image={gallery[index]}
-              setIndex={setIndex}
-              onClick={() => setIndex(false)}
-            />
-          )}
-        </AnimatePresence>
+        <Gallery items={gallery} slug={slug} id={id} location={location} />
       </AnimateSharedLayout>
     </div>
   );
 }
 
-function Gallery({ items, setIndex }) {
+function Gallery({ items, slug, id, location }) {
   const item = {
     initial: {
       clipPath: "inset(100% 0% 0% 0%)",
@@ -80,30 +54,12 @@ function Gallery({ items, setIndex }) {
         <GallerItem
           key={`card-list-${i}`}
           image={image}
+          slug={slug}
           i={i}
-          setIndex={setIndex}
+          id={id}
+          location={location}
         />
       ))}
     </motion.div>
-  );
-}
-
-function SingleImage({ image, index, onClick }) {
-  return (
-    <button className="card-content-container open" onClick={onClick}>
-      <motion.div className="card-content" layoutId={`card-container-${index}`}>
-        <motion.div
-          className="card-image-container"
-          layoutId={`card-image-container-${index}`}
-        >
-          <GatsbyImage
-            image={image.asset.thumb}
-            alt={image.caption}
-            className="card-image"
-          ></GatsbyImage>
-        </motion.div>
-        <p className="white-caption"> Descripción: {image.caption}</p>
-      </motion.div>
-    </button>
   );
 }

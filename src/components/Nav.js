@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "gatsby";
 import Logo from "./Logo";
 import { motion, AnimateSharedLayout } from "framer-motion";
@@ -26,12 +26,12 @@ export default function Nav({ isMobil, location }) {
           <div className="line" />
 
           <div className="navLogo">
-            {isMobil && <Logo />}
+            {!isMobil && <Logo />}
             <nav className="layoutNav">
               <AnimateSharedLayout>
                 {routes.map((r, i) => (
                   <ul key={`nav-ul-${i}`}>
-                    {i > 0 && isMobil ? <li> | </li> : null}
+                    {i > 0 && !isMobil ? <li> | </li> : null}
                     <li>
                       <ChhLink
                         routeId={i}

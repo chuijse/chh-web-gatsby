@@ -34,13 +34,12 @@ module.exports = {
     ],
   },
   plugins: [
-    `gatsby-plugin-smoothscroll`,
-    {
+    /*{
       resolve: `gatsby-plugin-layout`,
       options: {
         component: require.resolve(`./src/components/Layout.js`),
       },
-    },
+    },*/
     {
       resolve: "gatsby-source-sanity",
       options: {
@@ -48,7 +47,7 @@ module.exports = {
         dataset: "chh-web-api",
       },
     },
-
+    "gatsby-plugin-anchor-links",
     "gatsby-plugin-sass",
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",

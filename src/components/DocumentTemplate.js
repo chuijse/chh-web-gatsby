@@ -19,6 +19,8 @@ export default function DocumentTemplate({
   portableText,
   imageGallery,
   location,
+  slug,
+  id,
 }) {
   const [descriptionTitle, setDescriptionTitle] = useState("");
   const [backButton, setBackButton] = useState("");
@@ -55,11 +57,15 @@ export default function DocumentTemplate({
             title={title}
             location={location}
             backButton={backButton}
+            id={id}
           />
           <CourseBodyDescription
             portableText={portableText}
             imageGallery={imageGallery}
             descriptionTitle={descriptionTitle}
+            slug={slug}
+            id={id}
+            location={location}
           />
         </div>
       </div>

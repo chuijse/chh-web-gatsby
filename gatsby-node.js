@@ -48,17 +48,23 @@ exports.createPages = ({ actions, graphql }) => {
     });
   });
 
-  const getCourseArticles = makeRequest(
+  const getCourse = makeRequest(
     graphql,
     `
     {
       allSanityCourses {
         edges {
           node {
+            imageGallery {
+              slug {
+                current
+              }
+            }
             id
             slug{
               current
             }
+
           }
         }
       }
@@ -74,9 +80,22 @@ exports.createPages = ({ actions, graphql }) => {
           id: node.id,
         },
       });
+      for (let i = 0; i < node.imageGallery.length; i++) {
+        const l = node.imageGallery.length;
+        node.imageGallery &&
+          createPage({
+            path: `/teaching/${node.slug.current}/${i}/${node.imageGallery[i]?.slug.current}`,
+            component: path.resolve("src/templates/coursePhoto.js"),
+            context: {
+              id: node.id,
+              index: i,
+              totalLenghtIndex: l,
+            },
+          });
+      }
     });
   });
 
   // Query for articles nodes to use in creating pages.
-  return getBlogArticles, getCourseArticles;
+  return getBlogArticles, getCourse;
 };
