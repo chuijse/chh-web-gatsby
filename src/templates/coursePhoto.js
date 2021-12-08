@@ -12,6 +12,7 @@ import HeaderStat from "../components/HeaderStat";
 import ShareButtons from "../components/Share";
 import { useMediaQuery } from "react-responsive";
 import { motion, useMotionValue, useTransform } from "framer-motion";
+import { window } from "browser-monads"; //npm i browser-monads
 
 export default function SingleImage(props) {
   const course = props.data?.sanityCourses;
@@ -66,7 +67,8 @@ export default function SingleImage(props) {
   }
 
   function MobilHadle(x) {
-    if (x >= 255) {
+    if (x >= window.innerWidth - 20) {
+      console.log(x);
       HandlePreview();
     }
     if (x <= 20) {
