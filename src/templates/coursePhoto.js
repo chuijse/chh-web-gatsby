@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { motion } from "framer-motion";
 import { GatsbyImage } from "gatsby-plugin-image";
 import GoArrow from "../images/goArrow.svg";
 import { useInView } from "react-intersection-observer";
@@ -11,12 +10,17 @@ import { NavViewContext } from "../Context/NavViewContext";
 import Seo from "../components/Seo";
 import HeaderStat from "../components/HeaderStat";
 import ShareButtons from "../components/Share";
+import { useMediaQuery } from "react-responsive";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 
 export default function SingleImage(props) {
   const course = props.data?.sanityCourses;
   const { pageContext } = props;
   const { index, totalLenghtIndex } = pageContext;
   const { s, setNavView } = useContext(NavViewContext);
+  const isMobilorTablet = useMediaQuery({ maxWidth: 992 });
+
+  console.log(isMobilorTablet);
 
   useEffect(() => {
     setNavView(false);
@@ -30,13 +34,15 @@ export default function SingleImage(props) {
       navigate(
         `/teaching/${course.slug.current}/${index + 1}/${
           course.imageGallery[index + 1].slug.current
-        }`
+        }`,
+        { state: -500 }
       );
     } else {
       navigate(
         `/teaching/${course.slug.current}/${0}/${
           course.imageGallery[0].slug.current
-        }`
+        }`,
+        { state: -500 }
       );
     }
   }
@@ -46,14 +52,25 @@ export default function SingleImage(props) {
       navigate(
         `/teaching/${course.slug.current}/${index - 1}/${
           course.imageGallery[index - 1].slug.current
-        }`
+        }`,
+        { state: 500 }
       );
     } else {
       navigate(
         `/teaching/${course.slug.current}/${totalLenghtIndex - 1}/${
           course.imageGallery[totalLenghtIndex - 1].slug.current
-        }`
+        }`,
+        { state: 500 }
       );
+    }
+  }
+
+  function MobilHadle(x) {
+    if (x >= 255) {
+      HandlePreview();
+    }
+    if (x <= 20) {
+      HandleNext();
     }
   }
 
@@ -66,25 +83,22 @@ export default function SingleImage(props) {
       />
       <div
         className="single-image-root"
-        style={{ border: "2px solid green" }}
+
         //onClick={() => navigate(`/teaching/${course.slug.current}`)}
       >
-        <div className="single-image">
-          <SingleImageHeader
-            title={course.title}
-            slug={course.slug}
-            index={index}
-            id={course.id}
-            caption={course.imageGallery[index].caption}
-            totalLenghtIndex={totalLenghtIndex}
-            location={props.location}
-            abstract={course.abstract}
-          />
-          <div
-            className="single-image-body"
-            style={{ border: "1px solid blue" }}
-          >
-            <div className="single-image-content">
+        <SingleImageHeader
+          title={course.title}
+          slug={course.slug}
+          index={index}
+          id={course.id}
+          caption={course.imageGallery[index].caption}
+          totalLenghtIndex={totalLenghtIndex}
+          location={props.location}
+          abstract={course.abstract}
+        />
+        <div className="single-image-body">
+          <div className="single-image-content">
+            {!isMobilorTablet && (
               <button
                 onClick={() => HandlePreview()}
                 className="single-image-arrow-button"
@@ -95,12 +109,30 @@ export default function SingleImage(props) {
                   alt="back Arrow gallery, CHH | Portfolio"
                 ></img>
               </button>
-              <GatsbyImage
-                image={course.imageGallery[index].photo.asset.gatsbyImageData}
-                alt={course.imageGallery[index].caption}
-                objectFit="scale-down"
-                className="fullsize-image"
-              ></GatsbyImage>
+            )}
+            <motion.span
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              onDragEnd={(event, info) =>
+                isMobilorTablet && MobilHadle(info.point.x)
+              }
+            >
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0, transition: { duration: 0.1 } }}
+                transition={{ duration: 1 }}
+              >
+                <GatsbyImage
+                  image={course.imageGallery[index].photo.asset.gatsbyImageData}
+                  alt={course.imageGallery[index].caption}
+                  objectFit="scale-down"
+                  className="fullsize-image"
+                ></GatsbyImage>
+              </motion.span>
+            </motion.span>
+
+            {!isMobilorTablet && (
               <button
                 onClick={() => HandleNext()}
                 className="single-image-arrow-button"
@@ -111,12 +143,12 @@ export default function SingleImage(props) {
                   alt="forward arrow gallery, CHH | Portfolio"
                 ></img>
               </button>
-            </div>
-            {/*<p className="white-caption">
+            )}
+          </div>
+          {/*<p className="white-caption">
               Descripción: {course.imageGallery[index].caption} | index:{" "}
               {index + 1}/{totalLenghtIndex},
             </p>*/}
-          </div>
         </div>
       </div>
     </React.Fragment>
@@ -134,7 +166,7 @@ function SingleImageHeader({
   abstract,
 }) {
   return (
-    <div className="single-image-header" style={{ border: "2px solid red" }}>
+    <div className="single-image-header">
       <div className="single-image-header-content">
         <h1>Galeria de imágenes</h1>
         <HeaderStat statClass={"Título de curso:"} statName={title} />

@@ -1,4 +1,5 @@
 module.exports = {
+  //pathPrefix: "/chh-web-gatsby",
   siteMetadata: {
     title: "Cristian Huijse Portfolio",
     titleTemplate: "%s | CHH",
