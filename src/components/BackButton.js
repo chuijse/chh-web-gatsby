@@ -6,8 +6,8 @@ export default function BackButton({ text, path, id }) {
   return (
     <React.Fragment>
       <div className="back-button-root">
-        <img src={BackArrow} alt="back arrow CHH"></img>
         <Link className="back-button" to={path} state={{ lastId: `${id}` }}>
+          <img src={BackArrow} alt="back arrow CHH"></img>
           <span>{text}</span>
         </Link>
       </div>
