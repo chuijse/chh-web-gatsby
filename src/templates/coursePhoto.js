@@ -71,11 +71,12 @@ export default function SingleImage(props) {
   }
 
   function MobilHadle(x) {
-    if (x >= window.innerWidth - 40) {
+    if (x >= window.innerWidth - 60 && x !== 0) {
       console.log(x);
       HandlePreview();
     }
-    if (x <= 40) {
+    if (x <= 60 && x !== 0) {
+      console.log(x);
       HandleNext();
     }
   }
