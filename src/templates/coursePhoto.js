@@ -84,119 +84,117 @@ export default function SingleImage(props) {
   }
 
   return (
-    <React.Fragment>
+    <Div100vh>
       <Seo
         title={`${course.title}, galeria de imágenes`}
         description={`${course.abstract} | Descripción Foto: ${course.imageGallery[index].caption}`}
         image={course.imageGallery[index].photo.asset.url}
       />
-      <Div100vh>
-        <div
-          className="single-image-root"
+      <div
+        className="single-image-root"
 
-          //onClick={() => navigate(`/teaching/${course.slug.current}`)}
-        >
-          {viewHeader && (
-            <SingleImageHeader
-              title={course.title}
-              slug={course.slug}
-              index={index}
-              id={course.id}
-              caption={course.imageGallery[index].caption}
-              totalLenghtIndex={totalLenghtIndex}
-              location={props.location}
-              abstract={course.abstract}
-              isMobilorTablet={isMobilorTablet}
-            />
-          )}
-          <div className="single-image-body">
-            {isMobilorTablet && (
-              <span className="single-image-body-Mobil-title">
-                {!viewHeader ? (
-                  <BackButton
-                    path={`/teaching/${course.slug.current}`}
-                    text={``}
-                    id={`gallery-item${course.id}-${index}`}
-                  />
-                ) : (
-                  <div>{""}</div>
-                )}
-                <button onClick={() => setViewHeader(!viewHeader)}>
-                  <span className="info-indicator">
-                    {!viewHeader ? "+" : "-"}
-                  </span>
-                  info
-                </button>
-              </span>
-            )}
-            {!isMobilorTablet && (
-              <button
-                onClick={() => HandlePreview()}
-                className="single-image-arrow-button-left"
-              >
-                <img
-                  src={ArrowBack}
-                  width={60}
-                  alt="back Arrow gallery, CHH | Portfolio"
-                ></img>
-              </button>
-            )}
-            <motion.span
-              drag="x"
-              className="single-image-content"
-              dragConstraints={{ left: 0, right: 0 }}
-              onDragEnd={(event, info) =>
-                isMobilorTablet && MobilHadle(info.point.x)
-              }
-            >
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0, transition: { duration: 0.1 } }}
-                transition={{ duration: 1 }}
-              >
-                <GatsbyImage
-                  image={course.imageGallery[index].photo.asset.gatsbyImageData}
-                  alt={course.imageGallery[index].caption}
-                  objectFit="scale-down"
-                  className="fullsize-image"
-                ></GatsbyImage>
-              </motion.span>
-            </motion.span>
-
-            {!isMobilorTablet && (
-              <button
-                onClick={() => HandleNext()}
-                className="single-image-arrow-button-right"
-              >
-                <img
-                  src={ArrowForward}
-                  width={60}
-                  alt="forward arrow gallery, CHH | Portfolio"
-                ></img>
-              </button>
-            )}
-            {isMobilorTablet && (
-              <div className="single-image-body-mabil-footer">
-                <p className="single-image-body-caption">
-                  {course.imageGallery[index].caption}
-                </p>
-                <span className="sinlge-image-number-caption">
-                  <p className="white-caption">
-                    <span className="textYellow">{`${index + 1}`}</span>
-                  </p>
-                  <p className="white-caption">{`/${totalLenghtIndex}`}</p>
+        //onClick={() => navigate(`/teaching/${course.slug.current}`)}
+      >
+        {viewHeader && (
+          <SingleImageHeader
+            title={course.title}
+            slug={course.slug}
+            index={index}
+            id={course.id}
+            caption={course.imageGallery[index].caption}
+            totalLenghtIndex={totalLenghtIndex}
+            location={props.location}
+            abstract={course.abstract}
+            isMobilorTablet={isMobilorTablet}
+          />
+        )}
+        <div className="single-image-body">
+          {isMobilorTablet && (
+            <span className="single-image-body-Mobil-title">
+              {!viewHeader ? (
+                <BackButton
+                  path={`/teaching/${course.slug.current}`}
+                  text={``}
+                  id={`gallery-item${course.id}-${index}`}
+                />
+              ) : (
+                <div>{""}</div>
+              )}
+              <button onClick={() => setViewHeader(!viewHeader)}>
+                <span className="info-indicator">
+                  {!viewHeader ? "+" : "-"}
                 </span>
-              </div>
-            )}
-            {/*<p className="white-caption">
+                info
+              </button>
+            </span>
+          )}
+          {!isMobilorTablet && (
+            <button
+              onClick={() => HandlePreview()}
+              className="single-image-arrow-button-left"
+            >
+              <img
+                src={ArrowBack}
+                width={60}
+                alt="back Arrow gallery, CHH | Portfolio"
+              ></img>
+            </button>
+          )}
+          <motion.span
+            drag="x"
+            className="single-image-content"
+            dragConstraints={{ left: 0, right: 0 }}
+            onDragEnd={(event, info) =>
+              isMobilorTablet && MobilHadle(info.point.x)
+            }
+          >
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, transition: { duration: 0.1 } }}
+              transition={{ duration: 1 }}
+            >
+              <GatsbyImage
+                image={course.imageGallery[index].photo.asset.gatsbyImageData}
+                alt={course.imageGallery[index].caption}
+                objectFit="scale-down"
+                className="fullsize-image"
+              ></GatsbyImage>
+            </motion.span>
+          </motion.span>
+
+          {!isMobilorTablet && (
+            <button
+              onClick={() => HandleNext()}
+              className="single-image-arrow-button-right"
+            >
+              <img
+                src={ArrowForward}
+                width={60}
+                alt="forward arrow gallery, CHH | Portfolio"
+              ></img>
+            </button>
+          )}
+          {isMobilorTablet && (
+            <div className="single-image-body-mabil-footer">
+              <p className="single-image-body-caption">
+                {course.imageGallery[index].caption}
+              </p>
+              <span className="sinlge-image-number-caption">
+                <p className="white-caption">
+                  <span className="textYellow">{`${index + 1}`}</span>
+                </p>
+                <p className="white-caption">{`/${totalLenghtIndex}`}</p>
+              </span>
+            </div>
+          )}
+          {/*<p className="white-caption">
               Descripción: {course.imageGallery[index].caption} | index:{" "}
               {index + 1}/{totalLenghtIndex},
             </p>*/}
-          </div>
         </div>
-      </Div100vh>
-    </React.Fragment>
+      </div>
+    </Div100vh>
   );
 }
 
