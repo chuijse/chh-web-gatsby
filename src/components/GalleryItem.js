@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { GatsbyImage } from "gatsby-plugin-image";
 import GoArrow from "../images/goArrow.svg";
-
+import { useInView } from "react-intersection-observer";
 import { navigate } from "gatsby";
 import { scroller } from "react-scroll";
 
 const ImageGallerItem = ({ i, image, slug, location, id }) => {
   const [ItemSelected, setItemSelected] = useState(false);
+  const [ref, inView] = useInView();
+  const [inScreen, setInScreen] = useState(false);
 
   useEffect(() => {
     if (location.state?.lastId) {
@@ -24,8 +26,16 @@ const ImageGallerItem = ({ i, image, slug, location, id }) => {
     });
   }
 
+  useEffect(() => {
+    if (inView) {
+      //console.log(`inView: ${inView}`);
+      setInScreen(true);
+    }
+  }, [inView]);
+
   return (
     <motion.div
+      ref={ref}
       id={`gallery-item${id}-${i}`}
       className="card"
       onClick={() => navigate(`/teaching/${slug}/${i}/${image.slug.current}`)}
@@ -34,9 +44,8 @@ const ImageGallerItem = ({ i, image, slug, location, id }) => {
     >
       <motion.div
         className="card-content-container"
-        initial={{ clipPath: "inset(0% 0% 0% 100%)", x: "-100%" }}
-        whileInView={{ clipPath: "inset(0% 0% 0% 0%)", x: "0" }}
-        viewport={{ once: true }}
+        initial={{ clipPath: "inset(0% 0% 0% 100%)", x: "-95%" }}
+        animate={inView && { clipPath: "inset(0% 0% 0% 0%)", x: "0" }}
         transition={{ duration: 0.8, delay: 0.3 }}
       >
         <motion.div className="card-content" layoutId={`card-container-${i}`}>
