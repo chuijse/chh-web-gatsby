@@ -13,7 +13,7 @@ import ShareButtons from "../components/Share";
 import { useMediaQuery } from "react-responsive";
 import { motion } from "framer-motion";
 import { window } from "browser-monads"; //npm i browser-monads
-import Div100vh from "react-div-100vh";
+import { use100vh } from "react-div-100vh";
 import "../style/index.scss";
 
 export default function SingleImage(props) {
@@ -23,6 +23,8 @@ export default function SingleImage(props) {
   const { index, totalLenghtIndex } = pageContext;
   const { s, setNavView } = useContext(NavViewContext);
   const isMobilorTablet = useMediaQuery({ maxWidth: 992 });
+
+  const height = use100vh();
 
   useEffect(() => {
     setNavView(false);
@@ -84,7 +86,7 @@ export default function SingleImage(props) {
   }
 
   return (
-    <Div100vh>
+    <React.Fragment>
       <Seo
         title={`${course.title}, galeria de imágenes`}
         description={`${course.abstract} | Descripción Foto: ${course.imageGallery[index].caption}`}
@@ -92,6 +94,7 @@ export default function SingleImage(props) {
       />
       <div
         className="single-image-root"
+        style={{ height: height }}
 
         //onClick={() => navigate(`/teaching/${course.slug.current}`)}
       >
@@ -194,7 +197,7 @@ export default function SingleImage(props) {
             </p>*/}
         </div>
       </div>
-    </Div100vh>
+    </React.Fragment>
   );
 }
 

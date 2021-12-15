@@ -8,7 +8,6 @@
   align-items: center;
   flex-direction: column-reverse;
   //border: 2px solid pink;
-  height: 100%;
 
   @include tablet {
     flex-direction: column-reverse;
