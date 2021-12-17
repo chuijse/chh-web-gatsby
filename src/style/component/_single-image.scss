@@ -7,16 +7,15 @@
   justify-content: center;
   align-items: center;
   flex-direction: column-reverse;
+  overflow: hidden;
   //border: 2px solid pink;
 
   @include tablet {
     flex-direction: column-reverse;
-    overflow: auto;
   }
 
   @include desktop {
     flex-direction: row;
-    overflow: hidden;
   }
 }
 
