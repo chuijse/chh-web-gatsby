@@ -9,9 +9,11 @@
   grid-template-columns: 48% 48%;
   column-gap: 4%;
   row-gap: 12px;
+  border: 1px solid red;
 
   @include tablet {
     row-gap: 30px;
+    margin-bottom: 0px;
   }
 
   @include desktop {
@@ -20,6 +22,7 @@
 
   @include large {
     row-gap: 35px;
+    margin-bottom: 20px;
   }
 }
 

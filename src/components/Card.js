@@ -1,19 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import flechaHorizontal from "../images/flechaHorizontal.svg";
 //import flechaHorizontalB from "../images/flechaHorizontalB.svg";
 import { motion } from "framer-motion";
 import { GatsbyImage } from "gatsby-plugin-image";
 
-const Card = ({
-  title,
-  year,
-  semester,
-  mainImage,
-  mainCaption,
-  abstract,
-  id,
-}) => {
+const Card = ({ title, year, semester, mainImage, mainCaption, contents }) => {
   const [active, setactive] = useState(false);
+  const [contetText, setContetText] = useState("");
+
+  useEffect(() => {
+    setContetText(contents.map(({ name }) => `${name}`).join(", "));
+  }, []);
 
   return (
     <>
@@ -64,10 +61,7 @@ const Card = ({
                   transition={{ duration: "1" }}
                   className="info-open"
                 >
-                  <p>
-                    UX / UI, Interfaces físicas, Diseño de instrumentos, Diseño
-                    de productos
-                  </p>
+                  <p>{contetText}</p>
                   <motion.img
                     initial={{ x: -50, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}

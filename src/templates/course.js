@@ -22,20 +22,8 @@ const CourseArticle = ({ data, isMobil, isTablet, location }) => {
       <DocumentTemplate
         documentType="course"
         isTablet={isTablet}
-        title={course.title}
-        mainImage={course.mainImage}
-        universities={course.universities}
-        abstract={course.abstract}
-        year={course.year}
-        semester={course.semester}
-        colleagues={course.colleagues}
-        tecnologies={course.tecnologies}
-        title={course.title}
         location={location}
-        portableText={course._rawBody}
-        imageGallery={course.imageGallery}
-        slug={course.slug.current}
-        id={course.id}
+        {...course}
       />
     </React.Fragment>
   );
@@ -48,6 +36,12 @@ export const query = graphql`
     sanityCourses(id: { eq: $id }) {
       id
       abstract
+      courseContent {
+        name
+      }
+      role {
+        name
+      }
       title
       year
       semester

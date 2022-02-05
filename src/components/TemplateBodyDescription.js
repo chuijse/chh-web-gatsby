@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import PortableText from "./PortableText";
@@ -13,7 +13,7 @@ export default function TemplateBodyDescription({
   id,
 }) {
   return (
-    <div className="course-body-description">
+    <section className="course-body-description">
       <motion.h3
         initial={{ clipPath: "inset(0% 0% 100% 0%)", y: "100%" }}
         whileInView={{ clipPath: "inset(0% 0% 0% 0%)", y: "0" }}
@@ -44,6 +44,6 @@ export default function TemplateBodyDescription({
         slug={slug}
         location={location}
       ></ImageGallery>
-    </div>
+    </section>
   );
 }

@@ -11,7 +11,7 @@ import Seo from "../components/Seo";
 import HeaderStat from "../components/HeaderStat";
 import ShareButtons from "../components/Share";
 import { useMediaQuery } from "react-responsive";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { window } from "browser-monads"; //npm i browser-monads
 import { use100vh } from "react-div-100vh";
 import "../style/index.scss";
@@ -92,25 +92,44 @@ export default function SingleImage(props) {
         description={`${course.abstract} | Descripción Foto: ${course.imageGallery[index].caption}`}
         image={course.imageGallery[index].photo.asset.url}
       />
-      <div
+      <motion.article
         className="single-image-root"
-        style={{ height: height }}
+        style={{ height: height, overflow: "hidden" }}
+        //initial={{ clipPath: "inset(0% 0% 0% 100%)", x: "100%" }}
+        //animate={{ clipPath: "inset(0% 0% 0% 0%)", x: "0" }}
+        //transition={{ duration: 1 }}
 
         //onClick={() => navigate(`/teaching/${course.slug.current}`)}
       >
-        {viewHeader && (
-          <SingleImageHeader
-            title={course.title}
-            slug={course.slug}
-            index={index}
-            id={course.id}
-            caption={course.imageGallery[index].caption}
-            totalLenghtIndex={totalLenghtIndex}
-            location={props.location}
-            abstract={course.abstract}
-            isMobilorTablet={isMobilorTablet}
-          />
-        )}
+        <motion.div
+          initial={{ clipPath: "inset(0% 0% 0% 0%)" }}
+          animate={{ clipPath: "inset(0% 0% 0% 100%)" }}
+          exit={{ clipPath: "inset(0% 0% 0% 0%)" }}
+          transition={{ duration: 0.5 }}
+          style={{
+            position: "fixed",
+            background: "#000",
+            height: "100%",
+            width: "100%",
+            zIndex: 100,
+          }}
+        />
+        <AnimatePresence exitBeforeEnter>
+          {viewHeader && (
+            <SingleImageHeader
+              title={course.title}
+              slug={course.slug}
+              index={index}
+              id={course.id}
+              caption={course.imageGallery[index].caption}
+              totalLenghtIndex={totalLenghtIndex}
+              location={props.location}
+              abstract={course.abstract}
+              isMobilorTablet={isMobilorTablet}
+              viewHeader={viewHeader}
+            />
+          )}
+        </AnimatePresence>
         <div className="single-image-body">
           {isMobilorTablet && (
             <span className="single-image-body-Mobil-title">
@@ -143,7 +162,7 @@ export default function SingleImage(props) {
               ></img>
             </button>
           )}
-          <motion.span
+          <motion.figure
             drag="x"
             className="single-image-content"
             dragConstraints={{ left: 0, right: 0 }}
@@ -151,20 +170,13 @@ export default function SingleImage(props) {
               isMobilorTablet && MobilHadle(info.point.x)
             }
           >
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0, transition: { duration: 0.1 } }}
-              transition={{ duration: 1 }}
-            >
-              <GatsbyImage
-                image={course.imageGallery[index].photo.asset.gatsbyImageData}
-                alt={course.imageGallery[index].caption}
-                objectFit="scale-down"
-                className="fullsize-image"
-              ></GatsbyImage>
-            </motion.span>
-          </motion.span>
+            <GatsbyImage
+              image={course.imageGallery[index].photo.asset.gatsbyImageData}
+              alt={course.imageGallery[index].caption}
+              objectFit="scale-down"
+              className="fullsize-image"
+            ></GatsbyImage>
+          </motion.figure>
 
           {!isMobilorTablet && (
             <button
@@ -179,7 +191,7 @@ export default function SingleImage(props) {
             </button>
           )}
           {isMobilorTablet && (
-            <div className="single-image-body-mabil-footer">
+            <footer className="single-image-body-mabil-footer">
               <p className="single-image-body-caption">
                 {course.imageGallery[index].caption}
               </p>
@@ -189,14 +201,14 @@ export default function SingleImage(props) {
                 </p>
                 <p className="white-caption">{`/${totalLenghtIndex}`}</p>
               </span>
-            </div>
+            </footer>
           )}
           {/*<p className="white-caption">
               Descripción: {course.imageGallery[index].caption} | index:{" "}
               {index + 1}/{totalLenghtIndex},
             </p>*/}
         </div>
-      </div>
+      </motion.article>
     </React.Fragment>
   );
 }
@@ -210,9 +222,18 @@ function SingleImageHeader({
   totalLenghtIndex,
   location,
   abstract,
+  isMobilorTablet,
 }) {
   return (
-    <div className="single-image-header">
+    <motion.div
+      className="single-image-header"
+      initial={
+        isMobilorTablet && { clipPath: "inset(100% 0% 0% 0%)", y: "-100%" }
+      }
+      animate={isMobilorTablet && { clipPath: "inset(0% 0% 0% 0%)", y: "0" }}
+      exit={isMobilorTablet && { clipPath: "inset(100% 0% 0% 0%)", y: "-100%" }}
+      transition={{ duration: 1 }}
+    >
       <div className="single-image-header-content">
         <h1>Galeria de imágenes</h1>
         <HeaderStat statClass={"Título de curso:"} statName={title} />
@@ -237,7 +258,7 @@ function SingleImageHeader({
           tags={["CHH"]}
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

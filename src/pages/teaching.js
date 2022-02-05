@@ -62,7 +62,10 @@ export default function Teaching({ data, location }) {
   return (
     <React.Fragment>
       <Seo title="Teaching" />
-      <motion.div className="mainTeaching" exit={{ opacity: 0 }}>
+      <motion.div
+        className="mainTeaching"
+        //exit={{ opacity: 0 }}
+      >
         <div className="intro">
           <motion.h1
             initial={{ clipPath: "inset(0% 0% 100% 0%)", y: "100%" }}
@@ -120,6 +123,8 @@ export default function Teaching({ data, location }) {
                       <Card
                         id={filteredCourse.id}
                         title={filteredCourse.title}
+                        role={filteredCourse.role.name}
+                        contents={filteredCourse.courseContent}
                         mainImage={
                           filteredCourse.mainImage.asset.gatsbyImageData
                         }
@@ -145,6 +150,12 @@ export const query = graphql`
     allSanityCourses(sort: { fields: [year], order: DESC }) {
       nodes {
         title
+        courseContent {
+          name
+        }
+        role {
+          name
+        }
         id
         slug {
           current

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import HeaderStat from "./HeaderStat";
 
@@ -9,7 +9,15 @@ export default function TemplateHeaderInfo({
   universities,
   year,
   semester,
+  contents,
+  role,
 }) {
+  const [contetText, setContetText] = useState("");
+
+  useEffect(() => {
+    setContetText(contents.map(({ name }) => `${name}`).join(", "));
+  }, []);
+
   const container = {
     initial: { opacity: 0 },
     exit: { opacity: 0 },
@@ -27,13 +35,13 @@ export default function TemplateHeaderInfo({
       clipPath: "inset(100% 0% 0% 0%)",
       y: "-100%",
     },
-
     animate: {
       clipPath: "inset(0% 0% 0% 0%)",
       y: "0",
       transition: { duration: 1 },
     },
   };
+
   return (
     <motion.div
       initial="initial"
@@ -53,8 +61,8 @@ export default function TemplateHeaderInfo({
         {title}
       </motion.h1>
       <motion.span variants={item} className="course-header-animation-stat">
-        <HeaderStat statClass={"Contenidos"} statName={abstract} />
-        <HeaderStat statClass={"Rol"} statName={"Profesor Adjunto"} />
+        <HeaderStat statClass={"Contenidos"} statName={contetText} />
+        <HeaderStat statClass={"Rol"} statName={role.name} />
         <HeaderStat statClass={"Cliente"} statName={universities.name} />
         <HeaderStat
           statClass={"Año"}

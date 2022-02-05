@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Nav from "./Nav";
 import "../style/index.scss";
-import SmoothScroll from "../components/SmoothScroll";
 import { AnimatePresence } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 import { NavViewContext } from "../Context/NavViewContext";

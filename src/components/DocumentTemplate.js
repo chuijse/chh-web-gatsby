@@ -21,9 +21,14 @@ export default function DocumentTemplate({
   location,
   slug,
   id,
+  courseContent,
+  role,
+  _rawBody,
 }) {
   const [descriptionTitle, setDescriptionTitle] = useState("");
   const [backButton, setBackButton] = useState("");
+
+  console.log(_rawBody);
 
   useEffect(() => {
     switch (documentType) {
@@ -35,7 +40,25 @@ export default function DocumentTemplate({
   }, []);
 
   return (
-    <motion.div className="course-root" exit={{ opacity: 0 }}>
+    <motion.article
+      className="course-root"
+      //exit={{ opacity: 0, backgroundColor: "#000" }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div
+        initial={{ clipPath: "inset(0% 0% 0% 0%)" }}
+        animate={{ clipPath: "inset(0% 0% 0% 100%)" }}
+        exit={{ clipPath: "inset(0% 0% 0% 0%)" }}
+        transition={{ duration: 0.5 }}
+        style={{
+          display: "flex",
+          position: "fixed",
+          background: "#000",
+          height: "100%",
+          width: "100%",
+          zIndex: 100,
+        }}
+      />
       <div className="course-root-header">
         <div className="course-header">
           <CourseHeaderInfo
@@ -45,6 +68,8 @@ export default function DocumentTemplate({
             abstract={abstract}
             year={year}
             semester={semester}
+            contents={courseContent}
+            role={role}
           />
           <CourseHeaderImage isTablet={isTablet} mainImage={mainImage} />
         </div>
@@ -60,7 +85,7 @@ export default function DocumentTemplate({
             id={id}
           />
           <CourseBodyDescription
-            portableText={portableText}
+            portableText={_rawBody}
             imageGallery={imageGallery}
             descriptionTitle={descriptionTitle}
             slug={slug}
@@ -69,6 +94,6 @@ export default function DocumentTemplate({
           />
         </div>
       </div>
-    </motion.div>
+    </motion.article>
   );
 }
