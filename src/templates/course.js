@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { graphql } from "gatsby";
 import DocumentTemplate from "../components/DocumentTemplate";
 import Seo from "../components/Seo";
@@ -11,6 +11,10 @@ const CourseArticle = ({ data, isMobil, isTablet, location }) => {
   //const post = data && data.post;
   const course = data?.sanityCourses;
   //console.log(`${course} esto es course`);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <React.Fragment>

@@ -45,7 +45,7 @@ export default function DocumentTemplate({
       //exit={{ opacity: 0, backgroundColor: "#000" }}
       transition={{ duration: 0.5 }}
     >
-      <motion.div
+      {/*<motion.div
         initial={{ clipPath: "inset(0% 0% 0% 0%)" }}
         animate={{ clipPath: "inset(0% 0% 0% 100%)" }}
         exit={{ clipPath: "inset(0% 0% 0% 0%)" }}
@@ -58,7 +58,7 @@ export default function DocumentTemplate({
           width: "100%",
           zIndex: 100,
         }}
-      />
+      />*/}
       <div className="course-root-header">
         <div className="course-header">
           <CourseHeaderInfo

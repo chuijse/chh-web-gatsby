@@ -101,7 +101,7 @@ export default function SingleImage(props) {
 
         //onClick={() => navigate(`/teaching/${course.slug.current}`)}
       >
-        <motion.div
+        {/*<motion.div
           initial={{ clipPath: "inset(0% 0% 0% 0%)" }}
           animate={{ clipPath: "inset(0% 0% 0% 100%)" }}
           exit={{ clipPath: "inset(0% 0% 0% 0%)" }}
@@ -113,7 +113,7 @@ export default function SingleImage(props) {
             width: "100%",
             zIndex: 100,
           }}
-        />
+        />*/}
         <AnimatePresence exitBeforeEnter>
           {viewHeader && (
             <SingleImageHeader

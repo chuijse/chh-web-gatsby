@@ -62,11 +62,8 @@ export default function Teaching({ data, location }) {
   return (
     <React.Fragment>
       <Seo title="Teaching" />
-      <motion.div
-        className="mainTeaching"
-        //exit={{ opacity: 0 }}
-      >
-        <div className="intro">
+      <article className="mainTeaching">
+        <section className="intro">
           <motion.h1
             initial={{ clipPath: "inset(0% 0% 100% 0%)", y: "100%" }}
             animate={{ clipPath: "inset(0% 0% 0% 0%)", y: "0" }}
@@ -93,13 +90,13 @@ export default function Teaching({ data, location }) {
             categories={unicCategories}
             onSelect={setCategory}
           />
-        </div>
+        </section>
 
         {!courses ? (
           <div>Loading...</div>
         ) : (
           <AnimatePresence exitBeforeEnter>
-            <motion.div
+            <motion.section
               className="teachingGrid"
               variants={container}
               animate="animate"
@@ -114,7 +111,7 @@ export default function Teaching({ data, location }) {
                   )
                 )
                 .map((filteredCourse) => (
-                  <motion.span
+                  <motion.div
                     key={`card-course${filteredCourse.id}`}
                     id={`card-course${filteredCourse.id}`}
                     variants={item}
@@ -135,12 +132,12 @@ export default function Teaching({ data, location }) {
                         semester={filteredCourse.semester}
                       ></Card>
                     </Link>
-                  </motion.span>
+                  </motion.div>
                 ))}
-            </motion.div>
+            </motion.section>
           </AnimatePresence>
         )}
-      </motion.div>
+      </article>
     </React.Fragment>
   );
 }
