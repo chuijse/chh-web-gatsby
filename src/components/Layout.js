@@ -32,6 +32,8 @@ function Layout(props) {
   const isMobil = useMediaQuery({ maxWidth: 768 });
 
   const location = props.location.pathname;
+  const transitionPhoto= props.location.state?.transitionPhoto
+  console.log(transitionPhoto)
 
   const childrenWithProps = React.Children.map(props.children, (child) =>
     React.cloneElement(child, {
@@ -48,7 +50,7 @@ function Layout(props) {
         {navView && <Nav isMobil={isMobil} location={location} />}
         <AnimatePresence exitBeforeEnter>
           <motion.div key={location}>
-            {!navView && (
+            {transitionPhoto && (
               <motion.div
                 initial={{ opaclipPath: "inset(0% 0% 0% 0%)" }}
                 animate={{ clipPath: "inset(0% 0% 0% 100%)" }}
@@ -65,10 +67,10 @@ function Layout(props) {
               />
             )}
             <motion.main
-              variants={navView && regularTransition}
-              initial={navView ? "initial" : { opacity: 1 }}
-              animate={navView ? "enter" : { opacity: 1 }}
-              exit={navView ? "exit" : { opacity: 1 }}
+              variants={!transitionPhoto && regularTransition}
+              initial={!transitionPhoto ? "initial" : { opacity: 1 }}
+              animate={!transitionPhoto ? "enter" : { opacity: 1 }}
+              exit={!transitionPhoto ? "exit" : { opacity: 1 }}
             >
               {childrenWithProps}
             </motion.main>

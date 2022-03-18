@@ -250,6 +250,7 @@ function SingleImageHeader({
           path={`/teaching/${slug.current}`}
           text={`Docencia/${slug.current}`}
           id={`gallery-item${id}-${index}`}
+          transitionPhoto={true}
         />
         <ShareButtons
           title={`${title} | CHH Portafolio`}

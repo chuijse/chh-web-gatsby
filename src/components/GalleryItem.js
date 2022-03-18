@@ -11,14 +11,15 @@ const ImageGallerItem = ({ i, image, slug, location, id }) => {
 
   useEffect(() => {
     if (location.state?.lastId) {
-      scrollTo(`${location.state.lastId}`);
-      console.log(location.state.lastId);
+      scrollTo(`${location.state?.lastId}`);
+      //console.log(location.state.lastId);
     }
   }, []);
 
   function scrollTo(id) {
     scroller.scrollTo(id, {
-      duration: 2000,
+      //duration: 2000,
+      duration: 0,
       delay: 0,
       smooth: "easeInOutCubic",
     });
@@ -40,7 +41,7 @@ const ImageGallerItem = ({ i, image, slug, location, id }) => {
         id={`gallery-item${id}-${i}`}
         className="card"
         onClick={() =>
-          navigate(`/teaching/${slug.current}/${i}/${image.slug.current}`)
+          navigate(`/teaching/${slug.current}/${i}/${image.slug.current}`, {state: {transitionPhoto: true}})
         }
         onHoverStart={() => setItemSelected(true)}
         onHoverEnd={() => setItemSelected(false)}

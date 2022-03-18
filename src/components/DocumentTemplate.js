@@ -28,7 +28,7 @@ export default function DocumentTemplate({
   const [descriptionTitle, setDescriptionTitle] = useState("");
   const [backButton, setBackButton] = useState("");
 
-  console.log(_rawBody);
+  //console.log(_rawBody);
 
   useEffect(() => {
     switch (documentType) {
