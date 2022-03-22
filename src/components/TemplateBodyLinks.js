@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import BackButton from "./BackButton";
 import ShareButtons from "./Share";
 import Button from "./Button";
+import { PhotoTransitionContext } from "../Context/PhotoTransitionContext";
 
 function ButtonArray({ collectionType, data }) {
   return (
@@ -28,6 +29,7 @@ export default function TemplateBodyLinks({
 }) {
   const [ref, inView] = useInView();
   const [inScreen, setInScreen] = useState(false);
+  const {p, setPhotoTransition} = useContext(PhotoTransitionContext)
 
   useEffect(() => {
     if (inView) {
@@ -64,11 +66,14 @@ export default function TemplateBodyLinks({
             collectionType={"Tecnicas, herramientas y tecnologías:"}
           />
         </div>
-        <BackButton
-          text={`Volver a ${backButton}`}
-          path="/teaching"
-          id={`card-course${id}`}
-        />
+        <div onClick={()=> setPhotoTransition(false)}>
+          <BackButton
+            text={`Volver a ${backButton}`}
+            path="/teaching"
+            id={`card-course${id}`}
+            originPathname="/teaching"
+          />
+        </div>
         <ShareButtons
           title={`${title} | CHH Portafolio`}
           url={location.href}

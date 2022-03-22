@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "gatsby";
 import Logo from "./Logo";
 import { motion, AnimateSharedLayout } from "framer-motion";
+import { PhotoTransitionContext } from "../Context/PhotoTransitionContext";
 
 const routes = [
   { name: "About", path: "/", partialy: false },
@@ -14,6 +15,7 @@ const routes = [
 export default function Nav({ isMobil, location }) {
   const [selected, setSelected] = useState(0);
   const [mounted, setMounted] = useState(false);
+  
 
   useEffect(() => {
     setMounted(true);
@@ -86,9 +88,11 @@ function ChhLink({
       setTimeout(() => setActive(false), 5);
     }
   }, [location]);
+  const {p, setPhotoTransition} = useContext(PhotoTransitionContext)
 
   return (
     <Link
+      onClick={()=> setPhotoTransition(false)}
       to={path}
       className="navButton"
       partiallyActive={partialy}

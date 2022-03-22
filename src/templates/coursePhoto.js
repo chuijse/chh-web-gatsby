@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { GatsbyImage } from "gatsby-plugin-image";
-import GoArrow from "../images/goArrow.svg";
-import { useInView } from "react-intersection-observer";
 import { graphql, navigate } from "gatsby";
 import ArrowBack from "../images/arrowBack.svg";
 import ArrowForward from "../images/arrowForward.svg";
 import BackButton from "../components/BackButton";
-import { NavViewContext } from "../Context/NavViewContext";
+import { NavViewContext} from "../Context/NavViewContext";
+import { PhotoTransitionContext } from "../Context/PhotoTransitionContext";
 import Seo from "../components/Seo";
 import HeaderStat from "../components/HeaderStat";
 import ShareButtons from "../components/Share";
@@ -22,12 +21,16 @@ export default function SingleImage(props) {
   const { pageContext } = props;
   const { index, totalLenghtIndex } = pageContext;
   const { s, setNavView } = useContext(NavViewContext);
+  const {p, setPhotoTransition} = useContext(PhotoTransitionContext)
   const isMobilorTablet = useMediaQuery({ maxWidth: 992 });
 
   const height = use100vh();
 
+
   useEffect(() => {
     setNavView(false);
+    setPhotoTransition(true);
+
     if (isMobilorTablet === true) {
       setViewHeader(false);
     } else {
@@ -44,14 +47,18 @@ export default function SingleImage(props) {
         `/teaching/${course.slug.current}/${index + 1}/${
           course.imageGallery[index + 1].slug.current
         }`,
-        { state: -500 }
+        {
+          state: { transitionPhoto: true }
+        }
       );
     } else {
       navigate(
         `/teaching/${course.slug.current}/${0}/${
           course.imageGallery[0].slug.current
         }`,
-        { state: -500 }
+        {
+          state: { transitionPhoto: true }
+        }
       );
     }
   }
@@ -62,14 +69,18 @@ export default function SingleImage(props) {
         `/teaching/${course.slug.current}/${index - 1}/${
           course.imageGallery[index - 1].slug.current
         }`,
-        { state: 500 }
+        {
+          state: { transitionPhoto: true }
+        }
       );
     } else {
       navigate(
         `/teaching/${course.slug.current}/${totalLenghtIndex - 1}/${
           course.imageGallery[totalLenghtIndex - 1].slug.current
         }`,
-        { state: 500 }
+        {
+          state: { transitionPhoto: true }
+        }
       );
     }
   }
@@ -84,6 +95,8 @@ export default function SingleImage(props) {
       HandlePreview();
     }
   }
+
+  //console.log(props.location.pathname)
 
   return (
     <React.Fragment>
@@ -138,6 +151,7 @@ export default function SingleImage(props) {
                   path={`/teaching/${course.slug.current}`}
                   text={``}
                   id={`gallery-item${course.id}-${index}`}
+                  originPathname={props.location.pathname}
                 />
               ) : (
                 <div>{""}</div>
@@ -251,6 +265,7 @@ function SingleImageHeader({
           text={`Docencia/${slug.current}`}
           id={`gallery-item${id}-${index}`}
           transitionPhoto={true}
+          originPathname={location.pathname}
         />
         <ShareButtons
           title={`${title} | CHH Portafolio`}

@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
 import { GatsbyImage } from "gatsby-plugin-image";
 import GoArrow from "../images/goArrow.svg";
 import { navigate } from "gatsby";
 import { scroller } from "react-scroll";
 import { useInView } from "react-intersection-observer";
+import { PhotoTransitionContext } from "../Context/PhotoTransitionContext";
 
 const ImageGallerItem = ({ i, image, slug, location, id }) => {
   const [ItemSelected, setItemSelected] = useState(false);
+  const {p, setPhotoTransition} = useContext(PhotoTransitionContext)
 
   useEffect(() => {
     if (location.state?.lastId) {
@@ -35,14 +37,19 @@ const ImageGallerItem = ({ i, image, slug, location, id }) => {
     }
   }, [inView]);
 
+  
+ 
+  function  handleNavigation(current, i, imageCurrent){
+    setPhotoTransition(true)
+    setTimeout(()=>{navigate(`/teaching/${current}/${i}/${imageCurrent}`, { state:{ originPathname: `/teaching/${current}/${i}/${imageCurrent}`} } ) }, 500)
+  }
+
   return (
     <figure ref={ref}>
       <motion.div
         id={`gallery-item${id}-${i}`}
         className="card"
-        onClick={() =>
-          navigate(`/teaching/${slug.current}/${i}/${image.slug.current}`, {state: {transitionPhoto: true}})
-        }
+        onClick={() => handleNavigation(slug.current, i, image.slug.current) }
         onHoverStart={() => setItemSelected(true)}
         onHoverEnd={() => setItemSelected(false)}
       >

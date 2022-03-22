@@ -1,3 +1,3 @@
 import React from "react";
 
-export const NavViewContext = React.createContext(null);
+export const NavViewContext = React.createContext(false)

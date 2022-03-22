@@ -59,6 +59,8 @@ export default function Teaching({ data, location }) {
     });
   }
 
+  console.log(document.location.state)
+
   return (
     <React.Fragment>
       <Seo title="Teaching" />
@@ -116,7 +118,7 @@ export default function Teaching({ data, location }) {
                     id={`card-course${filteredCourse.id}`}
                     variants={item}
                   >
-                    <Link to={`/teaching/${filteredCourse.slug.current}`}>
+                    <Link to={`/teaching/${filteredCourse.slug.current}`} state={{ originPathname: "/teaching"}}>
                       <Card
                         id={filteredCourse.id}
                         title={filteredCourse.title}

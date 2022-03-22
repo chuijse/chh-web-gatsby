@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { motion, useElementScroll } from "framer-motion";
 import CourseBodyLinks from "../components/TemplateBodyLinks";
 import CourseBodyDescription from "../components/TemplateBodyDescription";
 import CourseHeaderInfo from "../components/TemplateHeaderInfo";
 import CourseHeaderImage from "../components/TemplateHeaderImage";
+import { PhotoTransitionContext } from "../Context/PhotoTransitionContext";
+
+
 
 export default function DocumentTemplate({
   documentType,
@@ -24,13 +27,52 @@ export default function DocumentTemplate({
   courseContent,
   role,
   _rawBody,
+  animationFinish,
 }) {
   const [descriptionTitle, setDescriptionTitle] = useState("");
   const [backButton, setBackButton] = useState("");
+  const {p, setPhotoTransition} = useContext(PhotoTransitionContext)
+  const [originPathname, setOriginPathname] = useState("");
 
   //console.log(_rawBody);
 
+  /*if (location.state?.originPathname) {
+    setOriginPathname(location.pathname) 
+    console.log(originPathname)
+  } else {
+    setOriginPathname(location.state?.originPathname)
+    console.log(originPathname)
+  }*/
+
+
+  //console.log(originPathname)
+
+
+  /*window.onpopstate = function(event) {
+    if(document.location.pathname === "/teaching" || originPathname === `/teaching` || originPathname === "start"){
+      setPhotoTransition(false)
+      alert("false: " + document.location.pathname +" "+ originPathname)
+    } else {
+      setPhotoTransition(true)
+      alert("true: " + document.location.pathname +" "+ originPathname) 
+    }
+    //alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
+  }*/
+
+  //console.log(location.state)
+
+  
+
+  /*useEffect(()=>{
+    console.log("animationFinish " + animationFinish)
+    if(animationFinish === true){ 
+    setPhotoTransition(false) 
+    console.log("animationFinish " + animationFinish)
+    }
+  },[animationFinish])*/
+
   useEffect(() => {
+    //
     switch (documentType) {
       case "course":
         setDescriptionTitle("Descripción del curso");
@@ -45,20 +87,7 @@ export default function DocumentTemplate({
       //exit={{ opacity: 0, backgroundColor: "#000" }}
       transition={{ duration: 0.5 }}
     >
-      {/*<motion.div
-        initial={{ clipPath: "inset(0% 0% 0% 0%)" }}
-        animate={{ clipPath: "inset(0% 0% 0% 100%)" }}
-        exit={{ clipPath: "inset(0% 0% 0% 0%)" }}
-        transition={{ duration: 0.5 }}
-        style={{
-          display: "flex",
-          position: "fixed",
-          background: "#000",
-          height: "100%",
-          width: "100%",
-          zIndex: 100,
-        }}
-      />*/}
+      
       <div className="course-root-header">
         <div className="course-header">
           <CourseHeaderInfo

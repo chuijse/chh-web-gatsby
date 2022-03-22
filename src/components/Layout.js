@@ -4,6 +4,7 @@ import "../style/index.scss";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 import { NavViewContext } from "../Context/NavViewContext";
+import { PhotoTransitionContext } from "../Context/PhotoTransitionContext"
 
 //const historyPathId = [];
 
@@ -30,53 +31,65 @@ const regularTransition = {
 function Layout(props) {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 });
   const isMobil = useMediaQuery({ maxWidth: 768 });
+  const [animationFinish, setAnimationFinish] = useState(false)
+  const [navView, setNavView] = useState(true);
+  const [photoTransition, setPhotoTransition] = useState(false);
+  const [history, setHistory] = useState([]) 
 
-  const location = props.location.pathname;
-  const transitionPhoto= props.location.state?.transitionPhoto
-  console.log(transitionPhoto)
+  useEffect(()=>{
+    setHistory([ props.location.pathname, ...history, ])
+    if (history.length >= 2){
+      setHistory(history.pop)
+      console.log("esto se fue a la chucha")
+    }
+  },[props.location.pathname])
+
 
   const childrenWithProps = React.Children.map(props.children, (child) =>
     React.cloneElement(child, {
       isMobile: isMobil,
       isTablet: isTabletOrMobile,
+      history: history
     })
   );
 
-  const [navView, setNavView] = useState(true);
+  console.log(history)
 
   return (
     <NavViewContext.Provider value={{ navView, setNavView }}>
+      <PhotoTransitionContext.Provider value={{ photoTransition, setPhotoTransition }}>
       <div className="layout">
-        {navView && <Nav isMobil={isMobil} location={location} />}
-        <AnimatePresence exitBeforeEnter>
-          <motion.div key={location}>
-            {transitionPhoto && (
-              <motion.div
-                initial={{ opaclipPath: "inset(0% 0% 0% 0%)" }}
-                animate={{ clipPath: "inset(0% 0% 0% 100%)" }}
-                exit={{ clipPath: "inset(0% 0% 0% 0%)" }}
-                transition={{ duration: 0.5 }}
-                style={{
-                  display: "flex",
-                  position: "fixed",
-                  background: "#000",
-                  height: "100%",
-                  width: "100%",
-                  zIndex: "100",
-                }}
-              />
-            )}
-            <motion.main
-              variants={!transitionPhoto && regularTransition}
-              initial={!transitionPhoto ? "initial" : { opacity: 1 }}
-              animate={!transitionPhoto ? "enter" : { opacity: 1 }}
-              exit={!transitionPhoto ? "exit" : { opacity: 1 }}
-            >
-              {childrenWithProps}
-            </motion.main>
-          </motion.div>
-        </AnimatePresence>
+        {navView && <Nav isMobil={isMobil} location={props.location.pathname} />}
+            <AnimatePresence exitBeforeEnter>
+              <motion.div key={props.location.pathname}>
+                  <motion.div
+                    //initial={{ clipPath: "inset(0% 0% 0% 0%)" }}
+                    animate={{ clipPath: "inset(0% 0% 0% 100%)" }}
+                    exit={{ clipPath: "inset(0% 0% 0% 0%)" }}
+                    transition={{ duration: 0.75 }}
+                    style={{
+                      display: "flex",
+                      position: "fixed",
+                      background: "#000",
+                      height: "100%",
+                      width: "100%",
+                      zIndex: "100",
+                      opacity: photoTransition ? 1 : 0 
+                    }}
+                  />
+                <motion.main
+                  variants={!photoTransition && regularTransition}
+                  initial={!photoTransition ? "initial" : { opacity: 1 }}
+                  animate={!photoTransition ? "enter" : { opacity: 1 }}
+                  exit={!photoTransition ? "exit" : { opacity: 1 }}
+                >
+                  {childrenWithProps}
+                </motion.main>
+              </motion.div>
+            </AnimatePresence>
+          
       </div>
+      </PhotoTransitionContext.Provider>
     </NavViewContext.Provider>
   );
 }
