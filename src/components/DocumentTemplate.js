@@ -27,7 +27,8 @@ export default function DocumentTemplate({
   courseContent,
   role,
   _rawBody,
-  animationFinish,
+  fromUrl,
+  history
 }) {
   const [descriptionTitle, setDescriptionTitle] = useState("");
   const [backButton, setBackButton] = useState("");
@@ -44,9 +45,7 @@ export default function DocumentTemplate({
     console.log(originPathname)
   }*/
 
-
-  //console.log(originPathname)
-
+  
 
   /*window.onpopstate = function(event) {
     if(document.location.pathname === "/teaching" || originPathname === `/teaching` || originPathname === "start"){
@@ -57,20 +56,11 @@ export default function DocumentTemplate({
       alert("true: " + document.location.pathname +" "+ originPathname) 
     }
     //alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
-  }*/
+  }
 
-  //console.log(location.state)
+  //console.log(location.state)*/
 
   
-
-  /*useEffect(()=>{
-    console.log("animationFinish " + animationFinish)
-    if(animationFinish === true){ 
-    setPhotoTransition(false) 
-    console.log("animationFinish " + animationFinish)
-    }
-  },[animationFinish])*/
-
   useEffect(() => {
     //
     switch (documentType) {

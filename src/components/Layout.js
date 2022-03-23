@@ -5,6 +5,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 import { NavViewContext } from "../Context/NavViewContext";
 import { PhotoTransitionContext } from "../Context/PhotoTransitionContext"
+import {
+  createMemorySource,
+  createHistory
+} from "@reach/router"
+
+
+
 
 //const historyPathId = [];
 
@@ -28,21 +35,29 @@ const regularTransition = {
   },
 };
 
+
+const history = []
+
+
 function Layout(props) {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 });
   const isMobil = useMediaQuery({ maxWidth: 768 });
   const [animationFinish, setAnimationFinish] = useState(false)
   const [navView, setNavView] = useState(true);
   const [photoTransition, setPhotoTransition] = useState(false);
-  const [history, setHistory] = useState([]) 
+  //const [history, setHistory] = useState([]) 
 
-  useEffect(()=>{
+  /*useEffect(()=>{
     setHistory([ props.location.pathname, ...history, ])
     if (history.length >= 2){
-      setHistory(history.pop)
-      console.log("esto se fue a la chucha")
+      setHistory((history)=>history.slice(0, 2))
     }
-  },[props.location.pathname])
+  },[props.location.pathname])*/
+
+  // listen to the browser history
+let history1 = createHistory(window)
+
+console.log(history1)
 
 
   const childrenWithProps = React.Children.map(props.children, (child) =>
@@ -53,7 +68,16 @@ function Layout(props) {
     })
   );
 
-  console.log(history)
+  history.unshift(props.location.pathname)
+  if (history.length > 2 ){
+    history.pop()
+  }
+  //console.log(history)
+
+  window.onpopstate = function(event) {
+    alert(" va hacia " + props.location.pathname + " desde " + history[1])
+  }
+
 
   return (
     <NavViewContext.Provider value={{ navView, setNavView }}>

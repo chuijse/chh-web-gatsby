@@ -6,7 +6,7 @@ import Seo from "../components/Seo";
 //const transition = [0.6, 0.01, -0.05, 0.9];
 //dconst duration = 1.4;
 
-const CourseArticle = ({ data, isMobil, isTablet, location, animationFinish }) => {
+const CourseArticle = ({ data, isMobil, isTablet, location, history }) => {
   //const { data, errors } = props;
   //const post = data && data.post;
   const course = data?.sanityCourses;
@@ -27,7 +27,8 @@ const CourseArticle = ({ data, isMobil, isTablet, location, animationFinish }) =
         documentType="course"
         isTablet={isTablet}
         location={location}
-        animationFinish={animationFinish}
+        history={history}
+        fromUrl="/teaching/"
         {...course}
       />
     </React.Fragment>
