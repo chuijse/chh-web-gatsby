@@ -47,18 +47,14 @@ export default function SingleImage(props) {
         `/teaching/${course.slug.current}/${index + 1}/${
           course.imageGallery[index + 1].slug.current
         }`,
-        {
-          state: { transitionPhoto: true }
-        }
+        { replace: true }
       );
     } else {
       navigate(
         `/teaching/${course.slug.current}/${0}/${
           course.imageGallery[0].slug.current
         }`,
-        {
-          state: { transitionPhoto: true }
-        }
+        { replace: true }
       );
     }
   }
@@ -69,18 +65,14 @@ export default function SingleImage(props) {
         `/teaching/${course.slug.current}/${index - 1}/${
           course.imageGallery[index - 1].slug.current
         }`,
-        {
-          state: { transitionPhoto: true }
-        }
+        { replace: true }
       );
     } else {
       navigate(
         `/teaching/${course.slug.current}/${totalLenghtIndex - 1}/${
           course.imageGallery[totalLenghtIndex - 1].slug.current
         }`,
-        {
-          state: { transitionPhoto: true }
-        }
+        { replace: true }
       );
     }
   }
@@ -152,6 +144,7 @@ export default function SingleImage(props) {
                   text={``}
                   id={`gallery-item${course.id}-${index}`}
                   originPathname={props.location.pathname}
+                  replace={true}
                 />
               ) : (
                 <div>{""}</div>
@@ -266,6 +259,7 @@ function SingleImageHeader({
           id={`gallery-item${id}-${index}`}
           transitionPhoto={true}
           originPathname={location.pathname}
+          replace={true}
         />
         <ShareButtons
           title={`${title} | CHH Portafolio`}
